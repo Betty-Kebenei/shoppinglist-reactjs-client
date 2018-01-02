@@ -11,7 +11,7 @@ class LoginForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChange(event){
-        this.setState({ [event.target.name]: event.target.value });
+        this.setState({ [event.target.name]: event.target.value.toLowerCase() });
     }
     handleSubmit(event){
         alert('You are successfully logged in!');
