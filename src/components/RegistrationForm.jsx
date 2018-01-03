@@ -23,17 +23,25 @@ class RegistrationForm extends React.Component {
         return(
             <div>
                 <form onSubmit={this.handleSubmit}>
+                    <div className="form-group">
                     <label>Username:</label>
                     <input type="text" name="username" onChange={this.handleChange} />
+                    </div>
                     
+                    <div className="form-group">
                     <label>Email:</label>
                     <input type="text" name="email" onChange={this.handleChange} />
-                    
+                    </div>
+
+                    <div className="form-group">
                     <label>Password:</label>
                     <input type="password" name="password" onChange={this.handleChange} />
+                    </div>
 
+                    <div className="form-group">
                     <label>Confirm Password:</label>
                     <input type="password" name="confirm_password" onChange={this.handleChange} />
+                    </div>
                     
                     <input type="submit" value="Submit" />
                 </form>
