@@ -1,6 +1,9 @@
 /*
     ./client/components/App.jsx
 */
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+
 import React from 'react';
 import Welcome from './Welcome.jsx';
 import RegistrationForm from './RegistrationForm';
