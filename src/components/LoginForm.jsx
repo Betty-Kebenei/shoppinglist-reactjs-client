@@ -5,7 +5,7 @@ class LoginForm extends React.Component {
         super(props);
         this.state = {
             email: '',
-            passowrd: ''
+            password: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,16 +20,29 @@ class LoginForm extends React.Component {
     render(){
         return(
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label> Username/Email: </label>
-                    <input type="text" name="email" onChange={this.handleChange} />
-                   
-                    <label> Password: </label>
-                    <input type="password" name="password" onChange={this.handleChange} />
-                    
-                    <input type="submit" value="Submit" />
-                    </form>
-            </div>
+                <div id="signinModal" className="modal fade" role="dialog">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="close" data-dismiss="modal">&times;</button>
+                                <h2 className="modal-title">Sign In</h2>
+                            </div>
+                            <div className="modal-body">
+                                <form className="signup" onSubmit={this.handleSubmit} >
+                                    Username/Email:<br />
+                                    <input type="text" name="username" onChange={this.handleChange} /><br />
+                                    Password:<br />
+                                    <input type="password" name="password" onChange={this.handleChange} /><br />
+                                    <input type="submit" value="Submit" />
+                                </form> 
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
         )
     }
 
