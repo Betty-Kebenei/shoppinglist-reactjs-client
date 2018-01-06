@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import '../static/index.css'
 
 class Welcome extends React.Component {
     render(){
@@ -7,8 +8,8 @@ class Welcome extends React.Component {
             <div>
                 <h1>Welcome to the Shopping List Tracker</h1>  
                 <h2>Let's help you keep tracker on what you desire to spend your money on.</h2>
-                <Button>Sign Up</Button>
-                <Button>Sign In</Button>
+                <button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#signupModal">Sign Up</button>
+                <button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#signinModal">Sign In</button>
             </div>
         )
     }
