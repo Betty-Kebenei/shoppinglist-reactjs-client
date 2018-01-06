@@ -1,0 +1,29 @@
+body {
+    background-color: skyblue;
+    margin: 0;
+    padding: 15% 5%;
+    font-family: sans-serif;
+  }
+
+form.signup input[type=text], input[type=password] {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: left;
+
+}
+
+form.signup input[type=submit] {
+  width: 80%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
