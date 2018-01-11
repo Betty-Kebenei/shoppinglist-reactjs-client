@@ -4,27 +4,30 @@ import '../static/index.css';
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { loginUser } from '../actions/Login';
 
 class LoginForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            email: '',
-            password: ''
+            email: 'email',
+            password: 'password'
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleChange(event){
-        this.setState({ [event.target.name]: event.target.value.toLowerCase() });
-    }
-    handleSubmit(event){
+
+    handleSubmit(values){
+        this.props.loginUser(values, () => {
+            this.props.history.push('/');
+        });
         alert('You are successfully logged in!');
-        event.preventDefault();
+        
     }
+
     renderField(field){
         return(
             <div className="form-group">
+                <label>{field.placeholder}</label>
                 <input
                 className = "form-control"
                 type = "text"
@@ -36,16 +39,22 @@ class LoginForm extends React.Component {
     render(){
         const { handleSubmit } = this.props;
         return(
-            <div>
+            <div className="Login col-sm-12">
+                <div className="Login col-sm-6">
+                    <h1>Shopping List Tracker</h1>  
+                    <p>We keep tracker on what you desire to spend your money on.</p>
+                </div>
                 <form className="LoginForm" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
                     <div className="form-item col-sm-2">
                     <Field
+                        placeholder = "email"
                         name = "email"
                         component = {this.renderField}
                     />
                     </div>
                     <div className="form-item col-sm-2">
                     <Field
+                        placeholder = "password"
                         name = "password"
                         component = {this.renderField}
                     />
@@ -58,4 +67,8 @@ class LoginForm extends React.Component {
         )
     }
 }
-export default reduxForm({form: 'LoginForm'})(LoginForm);
+export default reduxForm({
+    form: 'LoginForm'
+})(
+    connect(null, {loginUser})(LoginForm)
+);
