@@ -9,21 +9,21 @@ import reducers from '../reducers';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Header from './Header';
-import RegistrationForm from './RegistrationForm';
+import SigninPage from './SigninPage';
 import ShoppingList from './shoppinglist';
 import ShoppinglistForm from './ShoppinglistForm';
+import ShoppingitemsForm from './ShoppingitemsForm';
 
-const App = () => (
+const App = (props) => (
     <div>
         <Provider store={createStore(reducers)}>
            <BrowserRouter>
-                <div>
+                <div>  
                     <Switch>
-                        {/* <Header /> */}
-                        <Route path='/auth' component={RegistrationForm} />
-                        <Route path='/shoppinglists' component={ShoppinglistForm} />
-                        <Route path='/' component={ShoppingList} />
-                    </Switch>
+                        <Route path='/auth' component={SigninPage} />
+                        <Route path='/shoppinglists' component={() => (<div><Header /><ShoppingList/><ShoppinglistForm/></div>)} />
+                        <Route path='/' component={() => (<div><Header /><ShoppingList/></div>)} />
+                    </Switch> 
                 </div> 
             </BrowserRouter>
         </Provider>
