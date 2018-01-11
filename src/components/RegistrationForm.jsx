@@ -4,40 +4,14 @@ import '../static/index.css';
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-
+import { connect } from 'react-redux';
+import { createUser } from '../actions/Registration';
 
 class RegistrationForm extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            username: '',
-            email: '',
-            password: '',
-            confirm_password: '',
-            signupformErrors: {username: '', email: '', password:''},
-            usernameValid: false,
-            emailValid: false,
-            passwordValid: false,
-            formValid: false
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    handleChange(event){
-        this.setState(
-            {[event.target.name]: event.target.value.toLowerCase()}
-        );
-    }
-    handleSubmit(event){
-        console.log(event);
-        // alert('You are successfully registered to Shopping List Tracker!');
-        // this.setState({
-        //     username: '',
-        //     email: '',
-        //     password: '',
-        //     confirm_password: ''
-        // });
-        
+
+    handleSubmit(values){
+        this.props.createUser(values); 
+        alert('You are successfully registered!');
     }
 
     renderField(field){
@@ -81,7 +55,7 @@ class RegistrationForm extends React.Component {
                     />
                     <Field
                         label = "Confirm Password"
-                        name = "confirm_password"
+                        name = "repeat_password"
                         component = {this.renderField}
                     />
                     <button type="submit" className="btn btn-primary">Sign Up</button>
@@ -113,4 +87,6 @@ function validate (values){
 export default reduxForm({
     validate,
     form: 'RegistrationForm'
-})(RegistrationForm);
+})(
+    connect(null, {createUser})(RegistrationForm)
+);
