@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginForm from './LoginForm';
+import { connect } from 'react-redux';
 
 class Header extends React.Component {
     render(){
@@ -9,10 +9,10 @@ class Header extends React.Component {
                 <h1>Shopping List Tracker</h1>  
                 <p>We keep tracker on what you desire to spend your money on.</p>
                 </div>
-                <LoginForm />
+                <button className="btn btn-primary">Logout</button>
             </div>
         )
     }
 }
 
-export default Header
+export default Header;
