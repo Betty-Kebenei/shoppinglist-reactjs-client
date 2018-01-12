@@ -5,8 +5,8 @@ import '../static/index.css';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions/Login';
-import { fetchUsers } from '../actions/Login';
+import { loginUser } from '../../actions/Login';
+import { fetchUsers } from '../../actions/Login';
 
 class LoginForm extends React.Component {
 
@@ -14,15 +14,15 @@ class LoginForm extends React.Component {
         console.log('props', this.props)
         this.props.loginUser(values, () => {
             this.props.history.push('/');
+            alert('You are successfully logged in!');
         });
-        alert('You are successfully logged in!');
-        
+        this.props.reset(); 
     }
         
     errorMessage(){
         if(this.props.errorMessage){
             return (
-                <div className="has-danger">
+                <div className="error">
                     {this.props.errorMessage}
                 </div>
             );
@@ -46,7 +46,8 @@ class LoginForm extends React.Component {
         return(
             <div className="Login">
                 <form className="LoginForm" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
-                    <h2>Sign Up</h2><br />
+                    {this.errorMessage()}
+                    <h2>Sign In</h2><br />
                     <Field
                         placeholder = "email"
                         name = "email"
@@ -57,8 +58,7 @@ class LoginForm extends React.Component {
                         name = "password"
                         component = {this.renderField}
                     />
-                    <button type="submit" className="btn btn-primary">Sign In</button>
-                    {this.errorMessage()}
+                    <button type="submit" className="btn btn-primary">Sign In</button> 
                 </form>
             </div>  
         )
