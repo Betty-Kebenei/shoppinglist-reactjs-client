@@ -10,8 +10,15 @@ import { createUser } from '../actions/Registration';
 class RegistrationForm extends React.Component {
 
     handleSubmit(values){
-        this.props.createUser(values); 
-        alert('You are successfully registered!');
+        if (values.password === values.repeat_password){
+            this.props.createUser(values); 
+            alert('You are successfully registered!');
+        }
+        else{
+            alert('Password does not much confirm password!');
+        } 
+        //Clearing the data from the form after submission.
+        this.props.reset(); 
     }
 
     renderField(field){
@@ -38,6 +45,7 @@ class RegistrationForm extends React.Component {
             <div>
                 <form className="RegistrationForm" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
                     <h2>Sign Up</h2><br />
+
                     <Field
                         label = "Username"
                         name = "username"
@@ -66,6 +74,7 @@ class RegistrationForm extends React.Component {
 }
 
 function validate (values){
+    //Validate the form inputs.
     const errors = {};
     if(!values.username || values.username.length < 3){
         errors.username = "Please provide a username with a min length of 3!";
@@ -79,7 +88,6 @@ function validate (values){
     if(!values.confirm_password){
         errors.confirm_password = "Please confirm your password!";
     }
-
     return errors;
 
 }
