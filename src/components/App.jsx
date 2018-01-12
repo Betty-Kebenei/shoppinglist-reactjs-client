@@ -11,6 +11,8 @@ import reduxThunk from 'redux-thunk';
 
 import reducers from '../reducers';
 
+import { LOGIN_SUCCESS } from '../actions/Login';
+
 import Header from './Header';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
@@ -19,13 +21,19 @@ import ShoppinglistForm from './ShoppinglistForm';
 import ShoppingitemsForm from './ShoppingitemsForm';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise)(createStore);
+const store = createStoreWithMiddleware(reducers);
+const token = localStorage.getItem('access_token');
+
+if(token) {
+    store.dispatch({ type: LOGIN_SUCCESS});
+  }
 
 const App = (props) => (
     <div>
-        <Provider store={createStoreWithMiddleware(reducers)}>
+        <Provider store={store}>
            <BrowserRouter>
                 <div> 
-                    <Header /> 
+                    <Header {...this.props}/> 
                     <Switch>
                         <Route exact path='/auth/register' component={RegistrationForm} />
                         <Route exact path='/auth/login' component={LoginForm} />
