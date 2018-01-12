@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/Login'
 class Header extends Component {
+
+    onLogoutClick(){
+        console.log("Logout", this.props)
+        this.props.logoutUser((props) => {
+            this.props.history.push('/auth/login')  
+            alert('You are being logged out!'); 
+        }
+        );
+    }
     renderChange(){
         if(this.props.authenticated){
-            return (<button className="btn btn-primary">Logout</button>);
+            return (<button onClick={this.onLogoutClick.bind(this)} className="btn btn-primary">Logout</button>);
         }
         return (
                 <div></div>
@@ -26,4 +36,4 @@ function mapStateToProps(state){
         authenticated: state.user.authenticated
     };
 }
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, {logoutUser})(Header);
