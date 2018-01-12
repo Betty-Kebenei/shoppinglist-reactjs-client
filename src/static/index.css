@@ -39,6 +39,10 @@
   float: right;
 }
 
+.error{
+  color: red;
+}
+
 .Shoppinglist {
   background-color:grey;
   min-height: 700px;
