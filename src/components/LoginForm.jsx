@@ -6,23 +6,28 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/Login';
+import { fetchUsers } from '../actions/Login';
 
 class LoginForm extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            email: 'email',
-            password: 'password'
-        }
-    }
 
     handleSubmit(values){
+        console.log('props', this.props)
         this.props.loginUser(values, () => {
             this.props.history.push('/');
         });
         alert('You are successfully logged in!');
         
     }
+        
+    errorMessage(){
+        if(this.props.errorMessage){
+            return (
+                <div className="has-danger">
+                    {this.props.errorMessage}
+                </div>
+            );
+        }
+    }   
 
     renderField(field){
         return(
@@ -39,36 +44,34 @@ class LoginForm extends React.Component {
     render(){
         const { handleSubmit } = this.props;
         return(
-            <div className="Login col-sm-12">
-                <div className="Login col-sm-6">
-                    <h1>Shopping List Tracker</h1>  
-                    <p>We keep tracker on what you desire to spend your money on.</p>
-                </div>
+            <div className="Login">
                 <form className="LoginForm" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
-                    <div className="form-item col-sm-2">
+                    <h2>Sign Up</h2><br />
                     <Field
                         placeholder = "email"
                         name = "email"
                         component = {this.renderField}
                     />
-                    </div>
-                    <div className="form-item col-sm-2">
                     <Field
                         placeholder = "password"
                         name = "password"
                         component = {this.renderField}
                     />
-                    </div>
-                    <div className="form-item col-sm-2">
                     <button type="submit" className="btn btn-primary">Sign In</button>
-                    </div>
+                    {this.errorMessage()}
                 </form>
             </div>  
         )
     }
 }
+
+function mapStateToProps(state){
+    return{
+        errorMessage: state.user.error
+    };
+}
 export default reduxForm({
     form: 'LoginForm'
 })(
-    connect(null, {loginUser})(LoginForm)
+    connect(mapStateToProps, {loginUser} )(LoginForm)
 );
