@@ -13,12 +13,12 @@ import reducers from '../reducers';
 
 import { LOGIN_SUCCESS } from '../actions/Login';
 
-import Header from './Header';
-import RegistrationForm from './RegistrationForm';
-import LoginForm from './LoginForm';
-import ShoppingList from './Shoppinglist';
-import ShoppinglistForm from './ShoppinglistForm';
-import ShoppingitemsForm from './ShoppingitemsForm';
+import Header from './common/Header';
+import RegistrationForm from './authentication/RegistrationForm';
+import LoginForm from './authentication/LoginForm';
+import ShoppingList from './shoppinglist/Shoppinglist';
+import ShoppinglistForm from './shoppinglist/ShoppinglistForm';
+import ShoppingitemsForm from './shoppingitems/ShoppingitemsForm';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise)(createStore);
 const store = createStoreWithMiddleware(reducers);
