@@ -4,31 +4,37 @@ import '../static/index.css';
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducers from '../reducers';
+import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import promise from 'redux-promise';
+import reduxThunk from 'redux-thunk';
+
+import reducers from '../reducers';
 
 import Header from './Header';
-import SigninPage from './SigninPage';
-import ShoppingList from './shoppinglist';
+import RegistrationForm from './RegistrationForm';
+import LoginForm from './LoginForm';
+import ShoppingList from './Shoppinglist';
 import ShoppinglistForm from './ShoppinglistForm';
 import ShoppingitemsForm from './ShoppingitemsForm';
 
+const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise)(createStore);
+
 const App = (props) => (
     <div>
-        <Provider store={createStore(reducers)}>
+        <Provider store={createStoreWithMiddleware(reducers)}>
            <BrowserRouter>
-                <div>  
+                <div> 
+                    <Header /> 
                     <Switch>
-                        <Route path='/auth' component={SigninPage} />
-                        <Route path='/shoppinglists' component={() => (<div><Header /><ShoppingList/><ShoppinglistForm/></div>)} />
-                        <Route path='/' component={() => (<div><Header /><ShoppingList/></div>)} />
+                        <Route exact path='/auth/register' component={RegistrationForm} />
+                        <Route exact path='/auth/login' component={LoginForm} />
+                        <Route exact path='/shoppinglists' component={() => (<div><ShoppingList/><ShoppinglistForm/></div>)} />
+                        <Route exact path='/' component={ShoppingList} />
                     </Switch> 
                 </div> 
             </BrowserRouter>
         </Provider>
     </div>
-
 )
-
 export default App;
