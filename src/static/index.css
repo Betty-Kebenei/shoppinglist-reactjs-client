@@ -1,29 +1,66 @@
-body {
-    background-color: skyblue;
-    margin: 0;
-    padding: 15% 5%;
+.Header {
+  background-color: skyblue;
+  padding: 5px;
+}
+
+.Header button{
+  float: right;
+}
+
+.Login {
+  background-color: skyblue;
+  padding: 5px;
+}
+
+.Login h1 {
+  padding: 0px;
+  margin: 0px;
+}
+
+.container {
+    background: url('Store.jpg');
+    margin: auto;
+    min-height: 750px;
+    padding: 0%;
     font-family: sans-serif;
+    border: 1px solid black;
   }
 
-form.signup input[type=text], input[type=password] {
-  width: 80%;
-  padding: 12px 20px;
+.RegistrationForm {
+  background-color: skyblue;
+  width: 30%;
   margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
+  padding: 5px;
   border-radius: 4px;
   box-sizing: border-box;
-  text-align: left;
-
+  float: right;
+  min-height: 700px;
 }
 
-form.signup input[type=submit] {
-  width: 80%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.Shoppinglist {
+  background-color:grey;
+  min-height: 700px;
 }
+
+.ShoppinglistForm {
+  background-color: white;
+  margin: 0px 0px 0px 0px;
+  padding: 25px;
+  float: right;
+  min-height: 700px;
+ 
+}
+
+.ShoppinglistForm a {
+  float: right;
+}
+
+
+.ShoppingitemForm {
+  padding: 25px;
+  background-color: white;
+  float: right;
+  min-height: 700px;
+  height: 100%;
+}
+
