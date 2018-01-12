@@ -1,23 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import '../static/index.css';
+import '../../static/index.css';
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { createUser } from '../actions/Registration';
+import { createUser } from '../../actions/Registration';
 
 class RegistrationForm extends React.Component {
 
     handleSubmit(values){
-        if (values.password === values.repeat_password){
-            this.props.createUser(values); 
-            alert('You are successfully registered!');
-        }
-        else{
-            alert('Password does not much confirm password!');
-        } 
-        //Clearing the data from the form after submission.
+        this.props.createUser(values); 
+        alert('You are successfully registered!');
+        // //Clearing the data from the form after submission.
         this.props.reset(); 
     }
 
@@ -85,8 +80,11 @@ function validate (values){
     if(!values.password || values.password.length < 6 ){
         errors.password = "Please provide a password with a length of atleast 6!";
     }
-    if(!values.confirm_password){
-        errors.confirm_password = "Please confirm your password!";
+    if(!values.repeat_password){
+        errors.repeat_password = "Please confirm your password!";
+    }
+    if (values.password !== values.repeat_password){
+        errors.repeat_password = "Confirm Password must much password!!";
     }
     return errors;
 
