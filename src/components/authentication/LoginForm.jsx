@@ -6,12 +6,11 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/Login';
-import { fetchUsers } from '../../actions/Login';
 
 class LoginForm extends React.Component {
-
+    
     handleSubmit(values){
-        console.log('props', this.props)
+        console.log('This it the email and password', values);
         this.props.loginUser(values, () => {
             this.props.history.push('/');
             alert('You are successfully logged in!');
@@ -35,7 +34,7 @@ class LoginForm extends React.Component {
                 <label>{field.placeholder}</label>
                 <input
                 className = "form-control"
-                type = "text"
+                type = {field.type}
                 {...field.input}
                 />
             </div>
@@ -51,11 +50,13 @@ class LoginForm extends React.Component {
                     <Field
                         placeholder = "email"
                         name = "email"
+                        type = "text"
                         component = {this.renderField}
                     />
                     <Field
-                        placeholder = "password"
+                        placeholder = "Password"
                         name = "password"
+                        type="password"
                         component = {this.renderField}
                     />
                     <button type="submit" className="btn btn-primary">Sign In</button> 
