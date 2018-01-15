@@ -16,9 +16,14 @@ import { LOGIN_SUCCESS } from '../actions/Login';
 import Header from './common/Header';
 import RegistrationForm from './authentication/RegistrationForm';
 import LoginForm from './authentication/LoginForm';
+import Logout from './authentication/Logout';
+import authRequired from './common/AuthRequired';
+import noAuthRequired from './common/NoAuthRequired';
+import NotFound from './common/NotFound';
 import ShoppingList from './shoppinglist/Shoppinglist';
 import ShoppinglistForm from './shoppinglist/ShoppinglistForm';
 import ShoppingitemsForm from './shoppingitems/ShoppingitemsForm';
+import ViewAShoppinglist from './shoppinglist/ViewAShoppinglist';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -35,10 +40,12 @@ const App = (props) => (
                 <div> 
                     <Header {...this.props}/> 
                     <Switch>
-                        <Route exact path='/auth/register' component={RegistrationForm} />
-                        <Route exact path='/auth/login' component={LoginForm} />
-                        <Route exact path='/shoppinglists' component={() => (<div><ShoppingList/><ShoppinglistForm/></div>)} />
-                        <Route exact path='/' component={ShoppingList} />
+                        <Route exact path='/auth/register' component={noAuthRequired(RegistrationForm)} />
+                        <Route exact path='/auth/login' component={noAuthRequired(LoginForm)} />
+                        <Route exact path='/auth/logout' component={authRequired(Logout)} />
+                        <Route exact path='/add' component={authRequired(() => (<div><ShoppingList/><ShoppinglistForm/></div>))} />
+                        <Route exact path='/' component={authRequired(() => (<div><ShoppingList/><ViewAShoppinglist/></div>))} />
+                        <Route path= "*" component={NotFound} />
                     </Switch> 
                 </div> 
             </BrowserRouter>
