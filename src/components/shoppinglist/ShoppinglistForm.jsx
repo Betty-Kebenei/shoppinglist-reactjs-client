@@ -3,11 +3,17 @@ import '../../static/index.css';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { postShoppinglist } from '../../actions/Shoppinglist';
 class ShoppinglistForm extends React.Component{
 
-    handleSubmit(event){
-        alert('Shopping list successfully created!');
-        event.preventDefault();
+    handleSubmit(values){
+        this.props.postShoppinglist(values, () => {
+            this.context.router.history.push('/');
+            alert('Shopping list successfully created!');
+        });
+        this.props.reset(); 
     }
 
     renderField(field){
@@ -33,7 +39,6 @@ class ShoppinglistForm extends React.Component{
         return(
             <div>
                 <form className="ShoppinglistForm col-sm-8" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
-                    <h2>Create a new shopping list</h2><br />
                     <Field
                         name = "listname"
                         component = {this.renderField}
@@ -60,4 +65,6 @@ function validate (values){
 export default reduxForm({
     validate,
     form: 'ShoppinglistForm'
-})(ShoppinglistForm);
+})(
+    connect(null, { postShoppinglist })(ShoppinglistForm)
+);
