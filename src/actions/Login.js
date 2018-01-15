@@ -34,5 +34,4 @@ export function logoutUser(callback){
     return {
         type: NOT_LOGGEDIN
     };
-    callback()
 }
