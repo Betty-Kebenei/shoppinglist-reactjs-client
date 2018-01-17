@@ -1,8 +1,10 @@
 import axios from 'axios';
+import instance from './AxiosInstance';
 
 export const NOT_LOGGEDIN = 'not_loggedin';
 export const LOGIN_SUCCESS = 'login_success';
 export const LOGIN_ERROR = 'login_error';
+export const LOGOUT_ERROR = 'logout_error';
 
 const ROOT_URL = 'http://localhost:5000';
 
@@ -18,20 +20,39 @@ export function loginUser(values, callback){
             );
             localStorage.setItem('access_token', request.data.access_token)
             callback()
-        }catch(error){
+        }catch(error){           
             dispatch(
                 {
                     type: LOGIN_ERROR,
-                    payload: 'You email or password is invalid!'
+                    payload: error.response.data.message
+                    
                 }
             );
         }
     };
 }
 
-export function logoutUser(callback){
-    localStorage.clear();
-    return {
-        type: NOT_LOGGEDIN
+export function logoutUser(){
+    return async (dispatch) => {
+        try {
+            const request = await instance.post(`${ROOT_URL}/auth/logout`);
+
+            dispatch(
+                {
+                    type: NOT_LOGGEDIN
+                }
+            );
+            localStorage.clear();
+            window.location.reload()
+        }catch(error){           
+            dispatch(
+                {
+                    type: LOGOUT_ERROR,
+                    payload: error.response.data.message
+                    
+                }
+            );
+        }
     };
 }
+
