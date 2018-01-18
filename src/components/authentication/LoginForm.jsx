@@ -5,12 +5,13 @@ import '../../static/index.css';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import { loginUser } from '../../actions/Login';
 
 class LoginForm extends React.Component {
     
     handleSubmit(values){
-        console.log('This it the email and password', values);
         this.props.loginUser(values, () => {
             this.props.history.push('/');
             alert('You are successfully logged in!');
@@ -31,9 +32,9 @@ class LoginForm extends React.Component {
     renderField(field){
         return(
             <div className="form-group">
-                <label>{field.placeholder}</label>
                 <input
                 className = "form-control"
+                placeholder = {field.placeholder}
                 type = {field.type}
                 {...field.input}
                 />
@@ -54,12 +55,15 @@ class LoginForm extends React.Component {
                         component = {this.renderField}
                     />
                     <Field
-                        placeholder = "Password"
+                        placeholder = "password"
                         name = "password"
                         type="password"
                         component = {this.renderField}
                     />
-                    <button type="submit" className="btn btn-primary">Sign In</button> 
+                    <button type="submit" className="btn btn-primary">Submit</button> 
+                    <Link className="btn btn-primary" to="/auth/register">
+                    Sign up
+                    </Link> 
                 </form>
             </div>  
         )
