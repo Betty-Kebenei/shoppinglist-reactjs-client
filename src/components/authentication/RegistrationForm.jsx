@@ -5,16 +5,20 @@ import '../../static/index.css';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import { createUser } from '../../actions/Registration';
 
 class RegistrationForm extends React.Component {
 
     handleSubmit(values){
-        this.props.createUser(values); 
-        alert('You are successfully registered!');
-        // //Clearing the data from the form after submission.
+        this.props.createUser(values, () => {
+            this.props.history.push('/auth/login');
+            alert('You are successfully registered!');
+        });
         this.props.reset(); 
     }
+     
 
     renderField(field){
         const {meta: {touched, error}} = field;
@@ -24,7 +28,8 @@ class RegistrationForm extends React.Component {
                 <label>{field.label}</label>
                 <input
                 className = "form-control"
-                type = "text"
+                placeholder = {field.placeholder}
+                type = {field.type}
                 {...field.input}
                 />
                 <div className="text-help">
@@ -43,25 +48,36 @@ class RegistrationForm extends React.Component {
 
                     <Field
                         label = "Username"
+                        type = "text"
+                        placeholder = "username"
                         name = "username"
                         component = {this.renderField}
                     />
                     <Field
                         label = "Email"
+                        type = "text"
+                        placeholder = "email"
                         name = "email"
                         component = {this.renderField}
                     />
                     <Field
                         label = "Password"
+                        type = "password"
+                        placeholder = "password"
                         name = "password"
                         component = {this.renderField}
                     />
                     <Field
                         label = "Confirm Password"
+                        type = "password"
+                        placeholder = "confirm your password"
                         name = "repeat_password"
                         component = {this.renderField}
                     />
-                    <button type="submit" className="btn btn-primary">Sign Up</button>
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <Link className="btn btn-primary" to="/auth/login">
+                    Sign In
+                    </Link> 
                 </form>
             </div> 
         );
