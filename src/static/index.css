@@ -3,19 +3,10 @@
   padding: 5px;
 }
 
-.Header button{
+.Header a{
   float: right;
 }
 
-.Login {
-  background-color: skyblue;
-  padding: 5px;
-}
-
-.Login h1 {
-  padding: 0px;
-  margin: 0px;
-}
 
 .container {
     background: url('Store.jpg');
@@ -34,7 +25,22 @@
   border-radius: 4px;
   box-sizing: border-box;
   float: right;
-  min-height: 700px;
+
+}
+
+
+.Login {
+  background-color: skyblue;
+  width: 30%;
+  margin: 8px 0;
+  padding: 5px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  float: right;
+}
+
+.error{
+  color: red;
 }
 
 .Shoppinglist {
@@ -42,17 +48,26 @@
   min-height: 700px;
 }
 
-.ShoppinglistForm {
+/* .ShoppinglistForm {
   background-color: white;
   margin: 0px 0px 0px 0px;
   padding: 25px;
   float: right;
   min-height: 700px;
  
-}
+} */
 
 .ShoppinglistForm a {
   float: right;
+}
+
+
+.ViewShoppinglist {
+  background-color: white;
+  padding: 25px;
+  float: right;
+  min-height: 700px;
+ 
 }
 
 
@@ -63,4 +78,5 @@
   min-height: 700px;
   height: 100%;
 }
+
 

@@ -1,28 +1,32 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import '../static/index.css';
+import '../../static/index.css';
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions/Login';
+import { loginUser } from '../../actions/Login';
 
 class LoginForm extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            email: 'email',
-            password: 'password'
-        }
-    }
-
+    
     handleSubmit(values){
+        console.log('This it the email and password', values);
         this.props.loginUser(values, () => {
             this.props.history.push('/');
+            alert('You are successfully logged in!');
         });
-        alert('You are successfully logged in!');
-        
+        this.props.reset(); 
     }
+        
+    errorMessage(){
+        if(this.props.errorMessage){
+            return (
+                <div className="error">
+                    {this.props.errorMessage}
+                </div>
+            );
+        }
+    }   
 
     renderField(field){
         return(
@@ -30,7 +34,7 @@ class LoginForm extends React.Component {
                 <label>{field.placeholder}</label>
                 <input
                 className = "form-control"
-                type = "text"
+                type = {field.type}
                 {...field.input}
                 />
             </div>
@@ -39,36 +43,36 @@ class LoginForm extends React.Component {
     render(){
         const { handleSubmit } = this.props;
         return(
-            <div className="Login col-sm-12">
-                <div className="Login col-sm-6">
-                    <h1>Shopping List Tracker</h1>  
-                    <p>We keep tracker on what you desire to spend your money on.</p>
-                </div>
+            <div className="Login">
                 <form className="LoginForm" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
-                    <div className="form-item col-sm-2">
+                    {this.errorMessage()}
+                    <h2>Sign In</h2><br />
                     <Field
                         placeholder = "email"
                         name = "email"
+                        type = "text"
                         component = {this.renderField}
                     />
-                    </div>
-                    <div className="form-item col-sm-2">
                     <Field
-                        placeholder = "password"
+                        placeholder = "Password"
                         name = "password"
+                        type="password"
                         component = {this.renderField}
                     />
-                    </div>
-                    <div className="form-item col-sm-2">
-                    <button type="submit" className="btn btn-primary">Sign In</button>
-                    </div>
+                    <button type="submit" className="btn btn-primary">Sign In</button> 
                 </form>
             </div>  
         )
     }
 }
+
+function mapStateToProps(state){
+    return{
+        errorMessage: state.user.error
+    };
+}
 export default reduxForm({
     form: 'LoginForm'
 })(
-    connect(null, {loginUser})(LoginForm)
+    connect(mapStateToProps, {loginUser} )(LoginForm)
 );

@@ -1,4 +1,4 @@
-import '../static/index.css';
+import '../../static/index.css';
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
