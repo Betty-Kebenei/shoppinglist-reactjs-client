@@ -2,12 +2,27 @@ import '../../static/index.css';
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { postShoppingitems } from '../../actions/Shoppingitems'
+
 
 class ShoppingitemsForm extends React.Component {
-    handleSubmit(event){
-        alert('Shopping item successfully created!');
-        event.preventDefault();
+    constructor(props){
+        super(props);
     }
+
+    handleSubmit (values){
+        const list_id = this.props.oneshoppinglist.data.list_id;
+        this.props.postShoppingitems(list_id, values, () => {
+        this.props.history.push('/');
+        alert('Shopping item created!');
+        }
+    );   
+        this.props.reset(); 
+    }
+     
     renderField(field){
         const {meta: {touched, error}} = field;
         const className = `form-group ${ touched && error ? 'has-danger' : ''}`;
@@ -29,7 +44,7 @@ class ShoppingitemsForm extends React.Component {
         const { handleSubmit } = this.props;
         return(
             <div>
-                <form className="ShoppingitemForm col-sm-8" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
+                <form className="ShoppingitemForm col-sm-12" onSubmit={handleSubmit(this.handleSubmit.bind(this))  }>
                     <h2>Create a new item</h2><br />
                     <Field
                         label = "Itemname"
@@ -41,22 +56,15 @@ class ShoppingitemsForm extends React.Component {
                         name = "quantity"
                         component = {this.renderField}
                     />
-                    <Field
-                        label = "Units of measurements"
-                        name = "units"
-                        component = {this.renderField}
-                    />
                      <Field
                         label = "Price"
                         name = "price"
                         component = {this.renderField}
                     />
-                     <Field
-                        label = "Currency of the price"
-                        name = "currency"
-                        component = {this.renderField}
-                    />
                     <button type="submit" className="btn btn-primary">Create Item</button>
+                    <Link className="btn btn-primary" to="/">
+                        Cancel
+                    </Link> 
                 </form>
             </div>
         );
@@ -72,7 +80,16 @@ function validate (values){
 
 }
 
+function mapStateToProps(state){
+    
+    return{
+        oneshoppinglist: state.oneshoppinglist
+    }
+}
+
 export default reduxForm({
     validate,
     form: 'ShoppingitemsForm'
-})(ShoppingitemsForm);
+})(
+    connect(mapStateToProps, {postShoppingitems})(ShoppingitemsForm)
+);
