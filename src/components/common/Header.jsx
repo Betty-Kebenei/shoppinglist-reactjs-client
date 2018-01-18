@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { logoutUser } from '../../actions/Login'
+import { getAllShoppinglists } from '../../actions/Shoppinglist';
 class Header extends Component {
+
+    componentWillMount(){
+        this.props.getAllShoppinglists();
+    }
 
     onLogoutClick(){
         this.props.logoutUser();
@@ -39,4 +44,4 @@ function mapStateToProps(state){
         authenticated: state.user.authenticated
     };
 }
-export default connect(mapStateToProps, {logoutUser})(Header);
+export default connect(mapStateToProps, {getAllShoppinglists, logoutUser})(Header);
