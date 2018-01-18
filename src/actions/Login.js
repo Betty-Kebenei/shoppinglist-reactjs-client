@@ -56,3 +56,10 @@ export function logoutUser(){
     };
 }
 
+export function logout(){
+    localStorage.clear();
+    return({
+        type: NOT_LOGGEDIN
+    });
+}
+
