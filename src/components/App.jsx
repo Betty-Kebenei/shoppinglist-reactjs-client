@@ -6,10 +6,13 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { composeWithDevTools } from 'redux-devtools-extension';
+// import { ConnectedRouter, routerReducer, routerMiddleware, push} from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 import promise from 'redux-promise';
 import reduxThunk from 'redux-thunk';
 
-import reducers from '../reducers';
+import rootReducer from '../reducers';
 
 import { LOGIN_SUCCESS } from '../actions/Login';
 
@@ -25,8 +28,10 @@ import ShoppinglistForm from './shoppinglist/ShoppinglistForm';
 import ShoppingitemsForm from './shoppingitems/ShoppingitemsForm';
 import ViewAShoppinglist from './shoppinglist/ViewAShoppinglist';
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise)(createStore);
-const store = createStoreWithMiddleware(reducers);
+const history = createHistory();
+// const middleware = routerMiddleware(history)
+const createStoreWithMiddleware = composeWithDevTools(applyMiddleware(reduxThunk, promise))(createStore);
+const store = createStoreWithMiddleware(rootReducer);
 const token = localStorage.getItem('access_token');
 
 if(token) {
@@ -43,8 +48,10 @@ const App = (props) => (
                         <Route exact path='/auth/register' component={noAuthRequired(RegistrationForm)} />
                         <Route exact path='/auth/login' component={noAuthRequired(LoginForm)} />
                         <Route exact path='/auth/logout' component={authRequired(Logout)} />
-                        <Route exact path='/add' component={authRequired(() => (<div><ShoppingList/><ShoppinglistForm/></div>))} />
-                        <Route exact path='/' component={authRequired(() => (<div><ShoppingList/><ViewAShoppinglist/></div>))} />
+                        <Route exact path='/shoppinglist' component={authRequired(ShoppinglistForm)} />
+                        <Route exact path='/additem' component={ShoppingitemsForm}/>
+                        <Route exact path='/shoppinglists/:id' component={authRequired(() => (<div><ShoppingList/><ViewAShoppinglist/></div>))} />
+                        <Route exact path='/' component={authRequired(() => (<div><ShoppingList/><ViewAShoppinglist/></div>)) } />
                         <Route path= "*" component={NotFound} />
                     </Switch> 
                 </div> 
