@@ -5,13 +5,15 @@ import _ from 'lodash';
 
 import { bindActionCreators } from 'redux';
 
-import { getAllShoppinglists, getOneShoppinglist } from '../../actions/Shoppinglist';
+import { getAllShoppinglists, getOneShoppinglist,  deleteShoppinglists } from '../../actions/Shoppinglist';
+import { getAllShoppingitems } from '../../actions/Shoppingitems';
 
 class ShoppingList extends Component {
     constructor(props){
         super(props)
         this.renderShoppinglists = this.renderShoppinglists.bind(this)
     }
+    
     componentDidMount(){
         this.props.getAllShoppinglists();
     }
@@ -23,9 +25,11 @@ class ShoppingList extends Component {
                 return (
                     <li 
                         key={list_id}
-                        onClick={() => {this.props.getOneShoppinglist(list_id)}}
+                        onClick={() => {
+                            this.props.getOneShoppinglist(list_id);
+                        }}
                         className="list-group-item">
-                        {shoppinglist.listname}
+                        <Link to={`/shoppinglists/${list_id}`}>{shoppinglist.listname}</Link>
                     </li>
                 );
             })
@@ -35,9 +39,20 @@ class ShoppingList extends Component {
     render(){
         return(
             <div className="Shoppinglist col-sm-4">
-                <Link className="btn btn-primary" to="/add">
-                    Add Shopping List
-                </Link>
+                <Link className="btn glyphicon glyphicon-plus text-primary" 
+                    data-toggle="tooltip" 
+                    data-placement="top" 
+                    title="Add_lists"
+                    to="/shoppinglist" 
+                    />
+                <button 
+                    onClick={() => {this.props.deleteShoppinglists();}}
+                    type="button" 
+                    className="btn glyphicon glyphicon-trash text-primary" 
+                    data-toggle="tooltip" 
+                    data-placement="top" 
+                    title="Delete_all_lists" 
+                    />
                 <br /> <br/>
                 <p><b>Below is the list of your shopping lists:</b></p>
                 <ul className="list-group">
@@ -54,6 +69,6 @@ function mapStateToProps(state){
      } ;
 }
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ getAllShoppinglists, getOneShoppinglist }, dispatch)
+    return bindActionCreators({ getAllShoppinglists, getOneShoppinglist, getAllShoppingitems, deleteShoppinglists}, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList);
