@@ -9,12 +9,11 @@
 
 
 .container {
-    background: url('Store.jpg');
-    margin: auto;
-    min-height: 750px;
-    padding: 0%;
-    font-family: sans-serif;
-    border: 1px solid black;
+  background: url('img_5928.png');
+  margin: auto;
+  min-height: 750px;
+  padding: 0%;
+  font-family: sans-serif;
   }
 
 .RegistrationForm {
@@ -28,6 +27,9 @@
 
 }
 
+.RegistrationForm a{
+  float: right;
+}
 
 .Login {
   background-color: skyblue;
@@ -39,23 +41,28 @@
   float: right;
 }
 
+.Login a{
+  float: right;
+}
+
+
 .error{
   color: red;
 }
 
 .Shoppinglist {
-  background-color:grey;
+  background-color:#F5F5F5;
   min-height: 700px;
+  padding-top: 5px;
+  border-right: 1px solid black;
 }
 
-/* .ShoppinglistForm {
-  background-color: white;
-  margin: 0px 0px 0px 0px;
+.ShoppinglistForm {
+  background-color:#F5F5F5;
   padding: 25px;
-  float: right;
   min-height: 700px;
  
-} */
+} 
 
 .ShoppinglistForm a {
   float: right;
@@ -63,20 +70,31 @@
 
 
 .ViewShoppinglist {
-  background-color: white;
+  background-color:#F5F5F5;
   padding: 25px;
-  float: right;
   min-height: 700px;
- 
 }
 
+.ViewShoppinglist button{
+  float: right;
+}
+
+.ViewShoppinglist a{
+  float: right;
+}
 
 .ShoppingitemForm {
   padding: 25px;
-  background-color: white;
+  background-color:#F5F5F5;
   float: right;
   min-height: 700px;
   height: 100%;
 }
 
+.ViewItems {
+  background-color: white;
+  padding: 25px;
+  float: right;
+  min-height: 700px;
+}
 
