@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+
 import { postShoppingitems } from '../../actions/Shoppingitems'
 
 
@@ -16,11 +17,9 @@ class ShoppingitemsForm extends React.Component {
     handleSubmit (values){
         const list_id = this.props.oneshoppinglist.data.list_id;
         this.props.postShoppingitems(list_id, values, () => {
-        this.props.history.push('/');
-        alert('Shopping item created!');
-        }
-    );   
-        this.props.reset(); 
+                this.props.history.push(`/shoppinglist/${list_id}/shoppingitems`);
+            }
+        );   
     }
      
     renderField(field){
@@ -41,7 +40,12 @@ class ShoppingitemsForm extends React.Component {
         );
     }
     render(){
+        if (!this.props.oneshoppinglist) {
+            return <div>LOADING...</div>
+        }
+
         const { handleSubmit } = this.props;
+        const list_id = this.props.oneshoppinglist.data.list_id;
         return(
             <div>
                 <form className="ShoppingitemForm col-sm-12" onSubmit={handleSubmit(this.handleSubmit.bind(this))  }>
@@ -62,7 +66,7 @@ class ShoppingitemsForm extends React.Component {
                         component = {this.renderField}
                     />
                     <button type="submit" className="btn btn-primary">Create Item</button>
-                    <Link className="btn btn-primary" to="/">
+                    <Link className="btn btn-primary" to={`/shoppinglist/${list_id}/shoppingitems`}>
                         Cancel
                     </Link> 
                 </form>
@@ -81,7 +85,6 @@ function validate (values){
 }
 
 function mapStateToProps(state){
-    
     return{
         oneshoppinglist: state.oneshoppinglist
     }
