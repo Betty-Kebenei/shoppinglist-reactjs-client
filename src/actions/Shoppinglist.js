@@ -9,9 +9,12 @@ export const GET_ALLSHOPPINGLISTS_SUCCESS = 'get_allshoppinglists_success';
 export const GET_ALLSHOPPINGLISTS_ERROR = 'get_allshoppinglists_error';
 export const GET_ONESHOPPINGLIST_SUCCESS = 'get_oneshoppinglist_success';
 export const GET_ONESHOPPINGLIST_ERROR = 'get_oneshoppinglist_eeror';
+export const UPDATE_SHOPPINGLIST_SUCCESS = 'update_shoppinglist_success';
+export const UPDATE_SHOPPINGLIST_ERROR = 'update_shoppinglist_error';
 export const DELETE_ALLSHOPPINGLISTS_SUCCESS = 'delete_allshoppinglists_success';
 export const DELETE_ONESHOPPINGLIST_SUCCESS = 'delete_oneshoppinglist_success';
 export const DELETE_ONESHOPPINGLIST_ERROR = 'delete_oneshoppinglist_error';
+export const PAGINATE_SHOPPINGLIST = 'paginate_shoppinglist';
 
 export function postShoppinglist(values, callback){
   return async (dispatch) => {
@@ -24,6 +27,25 @@ export function postShoppinglist(values, callback){
       dispatch({
         type: POST_SHOPPINGLIST_ERROR,
         payload: 'Shoppping list name already exists.'
+      });
+    }
+  }; 
+}
+
+export function updateShoppinglist(list_id, values, callback){
+  return async (dispatch) => {
+    try {
+      const request = await instance.put(`${ROOT_URL}/shoppinglists/${list_id}`, values);
+
+      dispatch({
+        type: UPDATE_SHOPPINGLIST_SUCCESS,
+        payload: request
+      })
+      callback()
+    }catch(error){
+      dispatch({
+        type: UPDATE_SHOPPINGLIST_ERROR,
+        payload: error.response.data.message
       });
     }
   }; 
@@ -84,4 +106,11 @@ export function deleteShoppinglist(list_id){
       dispatch({type: DELETE_ONESHOPPINGLIST_ERROR});
     }
   }
+}
+
+export function paginateLists(limit, page){
+  return({
+    type: PAGINATE_SHOPPINGLIST,
+    payload: instance.get(`${ROOT_URL}/shoppinglists?limit=${limit}&page=${page}`)
+  });
 }
