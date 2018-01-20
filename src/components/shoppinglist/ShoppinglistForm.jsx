@@ -10,7 +10,7 @@ class ShoppinglistForm extends React.Component{
 
     handleSubmit(values){
         this.props.postShoppinglist(values, () => {
-            this.context.router.history.push('/');
+            this.props.history.push('/');
             alert('Shopping list successfully created!');
         });
         this.props.reset(); 
@@ -38,7 +38,7 @@ class ShoppinglistForm extends React.Component{
         const { handleSubmit } = this.props;
         return(
             <div>
-                <form className="ShoppinglistForm col-sm-8" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
+                <form className="ShoppinglistForm col-sm-12" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
                     <Field
                         name = "listname"
                         component = {this.renderField}
