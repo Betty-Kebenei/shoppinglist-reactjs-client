@@ -5,7 +5,12 @@ import _ from 'lodash';
 
 import { bindActionCreators } from 'redux';
 
-import { getAllShoppinglists, getOneShoppinglist,  deleteShoppinglists } from '../../actions/Shoppinglist';
+import { 
+    getAllShoppinglists,
+    getOneShoppinglist, 
+    deleteShoppinglists,
+    paginateLists
+ } from '../../actions/Shoppinglist';
 import { getAllShoppingitems } from '../../actions/Shoppingitems';
 
 class ShoppingList extends Component {
@@ -29,14 +34,19 @@ class ShoppingList extends Component {
                             this.props.getOneShoppinglist(list_id);
                         }}
                         className="list-group-item">
-                        <Link to={`/shoppinglists/${list_id}`}>{shoppinglist.listname}</Link>
+                        <Link to={`/shoppinglist/${list_id}`}>{shoppinglist.listname}</Link>
                     </li>
+                   
                 );
             })
         );
     }
 
     render(){
+        if (!this.props.allshoppinglists) {
+            return <div>LOADING...</div>
+        }
+
         return(
             <div className="Shoppinglist col-sm-4">
                 <Link className="btn glyphicon glyphicon-plus text-primary" 
@@ -58,6 +68,17 @@ class ShoppingList extends Component {
                 <ul className="list-group">
                     {this.renderShoppinglists()}
                 </ul>
+                <button 
+                    onClick={() => {this.props.paginateLists()}}
+                    type="button" 
+                    className="btn btn-primary" >
+                    Previous
+                </button>
+                <button 
+                    type="button" 
+                    className="btn btn-primary" >
+                    Next
+                </button>
             </div>
         );
     }
@@ -65,10 +86,17 @@ class ShoppingList extends Component {
 
 function mapStateToProps(state){
     return{
-        allshoppinglists: state.allshoppinglists
+        allshoppinglists: state.allshoppinglists.shoppinglists,
+        next_page: state.allshoppinglists.next
      } ;
 }
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ getAllShoppinglists, getOneShoppinglist, getAllShoppingitems, deleteShoppinglists}, dispatch)
+    return bindActionCreators({ 
+        getAllShoppinglists,
+        getOneShoppinglist,
+        getAllShoppingitems, 
+        deleteShoppinglists,
+        paginateLists
+    }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList);
