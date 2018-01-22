@@ -1,19 +1,17 @@
 import instance from './AxiosInstance';
+
+import toastr from 'toastr';
+
 import  {logout}  from './Login';
 
 const ROOT_URL = 'http://localhost:5000';
 
 export const POST_SHOPPINGLIST_SUCCESS = 'post_shoppinglist_success';
-export const POST_SHOPPINGLIST_ERROR = 'post_shoppinglist_success';
 export const GET_ALLSHOPPINGLISTS_SUCCESS = 'get_allshoppinglists_success';
-export const GET_ALLSHOPPINGLISTS_ERROR = 'get_allshoppinglists_error';
 export const GET_ONESHOPPINGLIST_SUCCESS = 'get_oneshoppinglist_success';
-export const GET_ONESHOPPINGLIST_ERROR = 'get_oneshoppinglist_eeror';
 export const UPDATE_SHOPPINGLIST_SUCCESS = 'update_shoppinglist_success';
-export const UPDATE_SHOPPINGLIST_ERROR = 'update_shoppinglist_error';
 export const DELETE_ALLSHOPPINGLISTS_SUCCESS = 'delete_allshoppinglists_success';
 export const DELETE_ONESHOPPINGLIST_SUCCESS = 'delete_oneshoppinglist_success';
-export const DELETE_ONESHOPPINGLIST_ERROR = 'delete_oneshoppinglist_error';
 export const PAGINATE_SHOPPINGLIST = 'paginate_shoppinglist';
 
 export function postShoppinglist(values, callback){
@@ -24,10 +22,7 @@ export function postShoppinglist(values, callback){
       dispatch({type: POST_SHOPPINGLIST_SUCCESS})
       callback()
     }catch(error){
-      dispatch({
-        type: POST_SHOPPINGLIST_ERROR,
-        payload: 'Shoppping list name already exists.'
-      });
+      toastr.error(error.response.data.message); 
     }
   }; 
 }
@@ -43,10 +38,7 @@ export function updateShoppinglist(list_id, values, callback){
       })
       callback()
     }catch(error){
-      dispatch({
-        type: UPDATE_SHOPPINGLIST_ERROR,
-        payload: error.response.data.message
-      });
+      toastr.error(error.response.data.message);
     }
   }; 
 }
@@ -61,8 +53,6 @@ export function getAllShoppinglists(){
         payload: request
       })
     }catch(error) {
-      dispatch({type: GET_ALLSHOPPINGLISTS_ERROR
-      });
       if(error.response.data.message === 'Sorry your token expired, please log in again!'){
         dispatch(logout())
       }
@@ -80,7 +70,7 @@ export function getOneShoppinglist(id){
         payload: request
       })
     }catch(error) {
-      dispatch({type: GET_ONESHOPPINGLIST_ERROR});
+      toastr.error(error.response.data.message);
     }
   }
 }
@@ -103,7 +93,7 @@ export function deleteShoppinglist(list_id){
       })
       window.location.reload()
     }catch(error) {
-      dispatch({type: DELETE_ONESHOPPINGLIST_ERROR});
+      toastr.error(error.response.data.message);
     }
   }
 }
