@@ -4,6 +4,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import toastr from 'toastr';
 
 import { postShoppinglist } from '../../actions/Shoppinglist';
 class ShoppinglistForm extends React.Component{
@@ -11,7 +12,7 @@ class ShoppinglistForm extends React.Component{
     handleSubmit(values){
         this.props.postShoppinglist(values, () => {
             this.props.history.push('/');
-            alert('Shopping list successfully created!');
+            toastr.success('Shopping list successfully created!');
         });
         this.props.reset(); 
     }
