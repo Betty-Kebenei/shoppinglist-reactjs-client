@@ -4,9 +4,10 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import toastr from 'toastr';
 
 
-import { updateShoppingitems } from '../../actions/Shoppingitems'
+import { getOneShoppingitem, updateShoppingitems } from '../../actions/Shoppingitems'
 
 
 class Edit_Shoppingitem extends Component {
@@ -15,12 +16,12 @@ class Edit_Shoppingitem extends Component {
     }
 
     handleSubmit (values){
-        const { list_id } = this.props.oneshoppinglist.data;
-        const item_id = this.props.shoppingitem;
-        this.props.updateShoppingitems(list_id, item_id, values, () => {
-                this.props.history.push(`/shoppinglists/${list_id}/shoppingitems`);
-            }
-        );   
+        const list_id = this.props.oneshoppinglist.data.list_id;
+        const { id } = this.props.match.params;
+        this.props.updateShoppingitems(list_id, id, values);
+        this.props.history.push(`/shoppinglist/${list_id}/shoppingitems`); 
+        toastr.success('Item successfully update!');
+        this.props.reset();     
     }
      
     renderField(field){
@@ -86,7 +87,6 @@ function validate (values){
 }
 
 function mapStateToProps(state){
-    console.log(state.shoppingitem)
     return{
         oneshoppinglist: state.oneshoppinglist,
         shoppingitem: state.shoppingitems.shoppingitem
@@ -98,5 +98,5 @@ export default reduxForm({
     validate,
     form: 'Edit_Shoppingitems'
 })(
-    connect(mapStateToProps, {updateShoppingitems})(Edit_Shoppingitem)
+    connect(mapStateToProps, {getOneShoppingitem, updateShoppingitems})(Edit_Shoppingitem)
 );
