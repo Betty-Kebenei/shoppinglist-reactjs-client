@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import '../static/index.css';
+import '../../node_modules/toastr/build/toastr.css';
 
 import React from 'react';
 import { Provider } from 'react-redux';
