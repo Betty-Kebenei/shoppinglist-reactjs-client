@@ -6,6 +6,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import toastr from 'toastr';
 
 import { loginUser } from '../../actions/Login';
 
@@ -14,39 +15,34 @@ class LoginForm extends React.Component {
     handleSubmit(values){
         this.props.loginUser(values, () => {
             this.props.history.push('/');
-            alert('You are successfully logged in!');
+            toastr.success("You are successfully logged in!")
         });
         this.props.reset(); 
-    }
-        
-    errorMessage(){
-        if(this.props.errorMessage){
-            return (
-                <div className="error">
-                    {this.props.errorMessage}
-                </div>
-            );
-        }
-    }   
+    }  
 
     renderField(field){
+        const {meta: {touched, error}} = field;
+        const className = `form-group ${ touched && error ? 'has-danger' : ''}`;
         return(
-            <div className="form-group">
+            <div className={className}>
                 <input
                 className = "form-control"
                 placeholder = {field.placeholder}
                 type = {field.type}
                 {...field.input}
                 />
+                <div className="text-help">
+                    { touched ? error : '' }
+                </div>
             </div>
         );
     }
+
     render(){
         const { handleSubmit } = this.props;
         return(
             <div className="Login">
                 <form className="LoginForm" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
-                    {this.errorMessage()}
                     <h2>Sign In</h2><br />
                     <Field
                         placeholder = "email"
@@ -69,14 +65,23 @@ class LoginForm extends React.Component {
         )
     }
 }
+function validate (values){
+    //Validate the form inputs.
+    const errors = {};
 
-function mapStateToProps(state){
-    return{
-        errorMessage: state.user.error
-    };
+    if(!values.email){
+        errors.email = "Please provide an email!";
+    }
+    if(!values.password){
+        errors.password = "Please provide a password!";
+    }
+    return errors;
+
 }
+
 export default reduxForm({
+    validate,
     form: 'LoginForm'
 })(
-    connect(mapStateToProps, {loginUser} )(LoginForm)
+    connect(null, {loginUser} )(LoginForm)
 );
