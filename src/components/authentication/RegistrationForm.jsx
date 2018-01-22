@@ -14,7 +14,7 @@ class RegistrationForm extends React.Component {
     handleSubmit(values){
         this.props.createUser(values, () => {
             this.props.history.push('/auth/login');
-            alert('You are successfully registered!');
+            toastr.success('You are successfully registered!');
         });
         this.props.reset(); 
     }
