@@ -4,7 +4,6 @@ import {
     DELETE_ALLSHOPPINGLISTS_SUCCESS, 
     DELETE_ONESHOPPINGLIST_SUCCESS,
     UPDATE_SHOPPINGLIST_SUCCESS,
-    UPDATE_SHOPPINGLIST_ERROR,
     PAGINATE_SHOPPINGLIST
  } from '../actions/Shoppinglist';
 
@@ -23,12 +22,6 @@ export default function(state = {
             return {
                 ...state,
                 updateSuccess: action.payload
-            }
-        case UPDATE_SHOPPINGLIST_ERROR:
-            return {
-                ...state,
-                updateError: action.payload
-
             }
         case PAGINATE_SHOPPINGLIST:
             return{
