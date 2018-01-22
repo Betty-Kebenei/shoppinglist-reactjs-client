@@ -1,23 +1,24 @@
 import '../../static/index.css';
 
-import React from 'react';
+import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
-import { postShoppingitems } from '../../actions/Shoppingitems'
+import { updateShoppingitems } from '../../actions/Shoppingitems'
 
 
-class ShoppingitemsForm extends React.Component {
+class Edit_Shoppingitem extends Component {
     constructor(props){
         super(props);
     }
 
     handleSubmit (values){
-        const list_id = this.props.oneshoppinglist.data.list_id;
-        this.props.postShoppingitems(list_id, values, () => {
-                this.props.history.push(`/shoppinglist/${list_id}/shoppingitems`);
+        const { list_id } = this.props.oneshoppinglist.data;
+        const item_id = this.props.shoppingitem;
+        this.props.updateShoppingitems(list_id, item_id, values, () => {
+                this.props.history.push(`/shoppinglists/${list_id}/shoppingitems`);
             }
         );   
     }
@@ -49,7 +50,7 @@ class ShoppingitemsForm extends React.Component {
         return(
             <div>
                 <form className="ShoppingitemForm col-sm-12" onSubmit={handleSubmit(this.handleSubmit.bind(this))  }>
-                    <h2>Create a new item</h2><br />
+                    <h2>Update item</h2><br />
                     <Field
                         label = "Itemname"
                         name = "itemname"
@@ -65,7 +66,7 @@ class ShoppingitemsForm extends React.Component {
                         name = "price"
                         component = {this.renderField}
                     />
-                    <button type="submit" className="btn btn-primary">Create Item</button>
+                    <button type="submit" className="btn btn-primary">Update Item</button>
                     <Link className="btn btn-primary" to={`/shoppinglist/${list_id}/shoppingitems`}>
                         Cancel
                     </Link> 
@@ -85,14 +86,17 @@ function validate (values){
 }
 
 function mapStateToProps(state){
+    console.log(state.shoppingitem)
     return{
-        oneshoppinglist: state.oneshoppinglist
+        oneshoppinglist: state.oneshoppinglist,
+        shoppingitem: state.shoppingitems.shoppingitem
+
     }
 }
 
 export default reduxForm({
     validate,
-    form: 'ShoppingitemsForm'
+    form: 'Edit_Shoppingitems'
 })(
-    connect(mapStateToProps, {postShoppingitems})(ShoppingitemsForm)
+    connect(mapStateToProps, {updateShoppingitems})(Edit_Shoppingitem)
 );

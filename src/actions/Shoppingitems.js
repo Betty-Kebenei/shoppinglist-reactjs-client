@@ -2,9 +2,15 @@ import instance from './AxiosInstance';
 const ROOT_URL = 'http://localhost:5000';
 
 export const GET_ALLSHOPPINGITEMS_SUCCESS = 'get_allshoppingitems_success';
-export const GET_ONESHOPPINGITEMS_SUCCESS = 'get_oneshoppingitems_success';
+export const GET_ONESHOPPINGITEM_SUCCESS = 'get_oneshoppingitems_success';
 export const POST_SHOPPINGITEM_SUCCESS = 'post_shoppingitem_success';
-export const POST_SHOPPINGITEM_ERROR = 'post_shoppingitem_error'
+export const POST_SHOPPINGITEM_ERROR = 'post_shoppingitem_error';
+export const UPDATE_SHOPPINGITEM_SUCCESS = 'update_shoppingitem_success';
+export const UPDATE_SHOPPINGITEM_ERROR = 'update_shoppingitem_error';
+export const DELETE_SHOPPINGITEM_SUCCESS = 'delete_shoppingitem_success';
+export const DELETE_SHOPPINGITEM_ERROR = 'delete_shoppingitem_error';
+export const DELETE_ALLSHOPPINGITEMS_SUCCESS = 'delete_allshoppingitems_success';
+export const DELETE_ALLSHOPPINGITEMS_ERROR = 'delete_allshoppingitems_error';
 
 export function getAllShoppingitems(list_id){
     return({
@@ -15,23 +21,71 @@ export function getAllShoppingitems(list_id){
 
 export function getOneShoppingitem(list_id, item_id){
  return({
-    type: GET_ONESHOPPINGITEMS_SUCCESS,
+    type: GET_ONESHOPPINGITEM_SUCCESS,
     payload: instance.get(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems/${item_id}`)
   });
 }
 
 export function postShoppingitems(list_id, values, callback){
   return async (dispatch) => {
-    try {
-      const request = await instance.post(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems`, values);
+      return await instance.post(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems`, values)
+      .then(response => {
+        dispatch({type: POST_SHOPPINGITEM_SUCCESS})
+        callback()
+      })
+      .catch(error => {
+        dispatch({
+          type: POST_SHOPPINGITEM_ERROR,
+          // payload: 'Shoppping list name already exists.'
+        });
+    }); 
+  }
+}
 
-      dispatch({type: POST_SHOPPINGITEM_SUCCESS})
+export function updateShoppingitems(list_id, item_id, values, callback){
+  return async (dispatch) => {
+    try {
+      const request = await instance.put(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems/${item_id}`, values);
+
+      dispatch({
+        type: UPDATE_SHOPPINGITEM_SUCCESS,
+        payload: request
+      })
       callback()
     }catch(error){
       dispatch({
-        type: POST_SHOPPINGITEM_ERROR,
-        // payload: 'Shoppping list name already exists.'
+        type: UPDATE_SHOPPINGITEM_ERROR,
+        payload: error.response.data.message
       });
     }
   }; 
 }
+
+export function deleteShoppingitem(list_id, item_id){
+  return async (dispatch) => {
+    try {
+      const request = await instance.delete(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems/${item_id}`)
+
+      dispatch({
+        type: DELETE_SHOPPINGITEM_SUCCESS,
+        payload: request
+      })
+      window.location.reload()
+    }catch(error){
+      dispatch({type: DELETE_SHOPPINGITEM_ERROR });
+    }};
+ }
+
+ export function deleteAllShoppingitems(list_id){
+  return async (dispatch) => {
+    try {
+      const request = await instance.delete(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems`)
+
+      dispatch({
+        type: DELETE_ALLSHOPPINGITEMS_SUCCESS,
+        payload: request
+      })
+    }catch(error){
+      dispatch({type: DELETE_ALLSHOPPINGITEMS_ERROR });
+    }};
+ }

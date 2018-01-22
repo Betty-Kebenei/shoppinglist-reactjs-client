@@ -79,11 +79,7 @@
   float: right;
 }
 
-.ViewShoppinglist a{
-  float: right;
-}
-
-.ShoppingitemForm {
+.ShoppingitemForm, .ViewItems{
   padding: 25px;
   background-color:#F5F5F5;
   float: right;
@@ -92,9 +88,8 @@
 }
 
 .ViewItems {
-  background-color: white;
+  background-color:#F5F5F5;
   padding: 25px;
-  float: right;
   min-height: 700px;
 }
 

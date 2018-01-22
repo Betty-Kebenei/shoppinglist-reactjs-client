@@ -27,6 +27,9 @@ import ShoppingList from './shoppinglist/Shoppinglist';
 import ShoppinglistForm from './shoppinglist/ShoppinglistForm';
 import ShoppingitemsForm from './shoppingitems/ShoppingitemsForm';
 import ViewAShoppinglist from './shoppinglist/ViewAShoppinglist';
+import ViewItems from './shoppingitems/ViewItems';
+import Edit_Shoppinglist from './shoppinglist/Edit_Shoppinglist';
+import Edit_Shoppingitem from './shoppingitems/Edit_Shoppingitems';
 
 const history = createHistory();
 // const middleware = routerMiddleware(history)
@@ -49,8 +52,11 @@ const App = (props) => (
                         <Route exact path='/auth/login' component={noAuthRequired(LoginForm)} />
                         <Route exact path='/auth/logout' component={authRequired(Logout)} />
                         <Route exact path='/shoppinglist' component={authRequired(ShoppinglistForm)} />
-                        <Route exact path='/additem' component={ShoppingitemsForm}/>
-                        <Route exact path='/shoppinglists/:id' component={authRequired(() => (<div><ShoppingList/><ViewAShoppinglist/></div>))} />
+                        <Route exact path='/additem' component={authRequired(ShoppingitemsForm)}/>
+                        <Route exact path='/shoppinglist/:id/update' component={authRequired(Edit_Shoppinglist)} />
+                        <Route exact path='/shoppinglist/:id' component={authRequired(() => (<div><ShoppingList/><ViewAShoppinglist/></div>))} />
+                        <Route exact path='/shoppinglist/:id/shoppingitem/:id' component={authRequired(Edit_Shoppingitem)} />
+                        <Route exact path='/shoppinglist/:id/shoppingitems' component={authRequired(ViewItems)} />
                         <Route exact path='/' component={authRequired(() => (<div><ShoppingList/><ViewAShoppinglist/></div>)) } />
                         <Route path= "*" component={NotFound} />
                     </Switch> 
