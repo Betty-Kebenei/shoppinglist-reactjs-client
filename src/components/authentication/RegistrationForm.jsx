@@ -7,6 +7,8 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import toastr from 'toastr';
+
 import { createUser } from '../../actions/Registration';
 
 class RegistrationForm extends React.Component {
