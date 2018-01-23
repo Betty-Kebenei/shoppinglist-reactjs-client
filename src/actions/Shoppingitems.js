@@ -94,10 +94,17 @@ export function deleteShoppingitem(list_id, item_id){
   });
 }
 
+export function searchShoppingitem(list_id, term){
+  return async (dispatch) => {
+    try{
+      const request = await instance.get(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems?q=${term}`)
 
- export function searchShoppingitem(list_id, term){
-  return({
-    type: SEARCH_SHOPPINGITEM,
-    payload: instance.get(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems?q=${term}`)
-  });
+      dispatch({
+        type: SEARCH_SHOPPINGITEM,
+        payload: request
+      })
+    }catch(error) {
+      toastr.error(error.response.data.message);
+    }
+  }
 }

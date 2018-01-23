@@ -107,8 +107,16 @@ export function paginateLists(limit, page){
 }
 
 export function searchShoppinglist(term){
-  return({
-    type: SEARCH_SHOPPINGLIST,
-    payload: instance.get(`${ROOT_URL}/shoppinglists?q=${term}`)
-  });
+  return async (dispatch) => {
+    try{
+      const request = await instance.get(`${ROOT_URL}/shoppinglists?q=${term}`)
+
+      dispatch({
+        type: SEARCH_SHOPPINGLIST,
+        payload: request
+      })
+    }catch(error) {
+      toastr.error(error.response.data.message);
+    }
+  }
 }
