@@ -1,9 +1,10 @@
 import axios from 'axios';
 import instance from './AxiosInstance';
 
+import toastr from 'toastr';
+
 export const NOT_LOGGEDIN = 'not_loggedin';
 export const LOGIN_SUCCESS = 'login_success';
-export const LOGIN_ERROR = 'login_error';
 export const LOGOUT_ERROR = 'logout_error';
 
 const ROOT_URL = 'http://localhost:5000';
@@ -13,21 +14,11 @@ export function loginUser(values, callback){
         try {
             const request = await axios.post(`${ROOT_URL}/auth/login`, values);
 
-            dispatch(
-                {
-                    type: LOGIN_SUCCESS
-                }
-            );
+            dispatch({type: LOGIN_SUCCESS});
             localStorage.setItem('access_token', request.data.access_token)
             callback()
-        }catch(error){           
-            dispatch(
-                {
-                    type: LOGIN_ERROR,
-                    payload: error.response.data.message
-                    
-                }
-            );
+        }catch(error){ 
+            toastr.error(error.response.data.message);          
         }
     };
 }
@@ -35,7 +26,7 @@ export function loginUser(values, callback){
 export function logoutUser(){
     return async (dispatch) => {
         try {
-            const request = await instance.post(`${ROOT_URL}/auth/logout`);
+            //const request = await instance.post(`${ROOT_URL}/auth/logout`);
 
             dispatch(
                 {

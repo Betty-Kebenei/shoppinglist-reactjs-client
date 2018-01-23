@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
 
-import { getAllShoppingitems, deleteAllShoppingitems, deleteShoppingitem } from '../../actions/Shoppingitems';
+import { 
+    getAllShoppingitems,
+    deleteAllShoppingitems,
+    deleteShoppingitem 
+} from '../../actions/Shoppingitems';
 
 class ViewItems extends Component {
     constructor(props){
@@ -11,8 +15,10 @@ class ViewItems extends Component {
     }
 
     componentDidMount(){
-        const list_id = this.props.oneshoppinglist.data.list_id;
-        this.props.getAllShoppingitems(list_id);
+        if(this.props.oneshoppinglist){
+            const list_id = this.props.oneshoppinglist.data.list_id;
+            this.props.getAllShoppingitems(list_id);
+        }  
     }
 
     renderShoppingitems(){

@@ -4,6 +4,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import toastr from 'toastr';
 
 import { updateShoppinglist } from '../../actions/Shoppinglist';
 class Edit_Shoppinglist extends React.Component{
@@ -12,9 +13,9 @@ class Edit_Shoppinglist extends React.Component{
         const list_id = this.props.oneshoppinglist.data.list_id;
         this.props.updateShoppinglist(list_id, values, () => {
             this.props.history.push(`/shoppinglist/${list_id}`);
-            alert('Shopping list successfully updated!');
+            toastr.success('Shopping list successfully updated!');
+            this.props.reset(); 
         });
-        this.props.reset(); 
     }
 
     renderField(field){
@@ -38,7 +39,6 @@ class Edit_Shoppinglist extends React.Component{
 
     render(){
         const { handleSubmit } = this.props;
-        // const { listname } =this.props.oneshoppinglist.data;
         return(
             <div>
                 <form className="ShoppinglistForm col-sm-12" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>

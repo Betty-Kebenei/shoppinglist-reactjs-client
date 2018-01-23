@@ -3,13 +3,9 @@ import {
     GET_ALLSHOPPINGITEMS_SUCCESS,
     GET_ONESHOPPINGITEM_SUCCESS,
     POST_SHOPPINGITEM_SUCCESS,
-    POST_SHOPPINGITEM_ERROR,
     UPDATE_SHOPPINGITEM_SUCCESS,
-    UPDATE_SHOPPINGITEM_ERROR,
     DELETE_SHOPPINGITEM_SUCCESS,
-    DELETE_SHOPPINGITEM_ERROR,
-    DELETE_ALLSHOPPINGITEMS_SUCCESS,
-    DELETE_ALLSHOPPINGITEMS_ERROR 
+    DELETE_ALLSHOPPINGITEMS_SUCCESS
 } from '../actions/Shoppingitems';
 
 export default function(state = {}, action) {
@@ -22,22 +18,14 @@ export default function(state = {}, action) {
         case GET_ONESHOPPINGITEM_SUCCESS:
             return {
                 ...state,
-                shoppingitem: action.payload
+                shoppingitem: action.payload.data
             }
         case POST_SHOPPINGITEM_SUCCESS:
             return action.payload
-        case POST_SHOPPINGITEM_ERROR:
-            return { error: action.payload };
         case UPDATE_SHOPPINGITEM_SUCCESS:
             return {
                 ...state,
-                updateSuccess: action.payload
-            }
-        case UPDATE_SHOPPINGITEM_ERROR:
-            return {
-                ...state,
-                updateError: action.payload
-
+                updateSuccess: action.payload.data
             }
         case DELETE_SHOPPINGITEM_SUCCESS:
             return action.payload

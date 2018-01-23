@@ -4,6 +4,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import toastr from 'toastr';
 
 
 import { postShoppingitems } from '../../actions/Shoppingitems'
@@ -17,9 +18,10 @@ class ShoppingitemsForm extends React.Component {
     handleSubmit (values){
         const list_id = this.props.oneshoppinglist.data.list_id;
         this.props.postShoppingitems(list_id, values, () => {
-                this.props.history.push(`/shoppinglist/${list_id}/shoppingitems`);
-            }
-        );   
+        this.props.history.push(`/shoppinglist/${list_id}/shoppingitems`);
+        toastr.success('Item successfully created!');
+        });
+        this.props.reset();    
     }
      
     renderField(field){
