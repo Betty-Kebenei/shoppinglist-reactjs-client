@@ -3,8 +3,8 @@ import {
     GET_ALLSHOPPINGLISTS_SUCCESS, 
     DELETE_ALLSHOPPINGLISTS_SUCCESS, 
     DELETE_ONESHOPPINGLIST_SUCCESS,
-    UPDATE_SHOPPINGLIST_SUCCESS,
-    PAGINATE_SHOPPINGLIST
+    PAGINATE_SHOPPINGLIST,
+    SEARCH_SHOPPINGLIST
  } from '../actions/Shoppinglist';
 
 export default function(state = {
@@ -16,12 +16,10 @@ export default function(state = {
         case GET_ALLSHOPPINGLISTS_SUCCESS:
             return{
                 ...state,
+                count: action.payload.data.count,
+                previous: action.payload.data.prev,
+                next: action.payload.data.next,
                 shoppinglists: _.mapKeys(action.payload.data.shoppinglists, 'list_id')
-            }
-        case UPDATE_SHOPPINGLIST_SUCCESS:
-            return {
-                ...state,
-                updateSuccess: action.payload
             }
         case PAGINATE_SHOPPINGLIST:
             return{
@@ -29,7 +27,12 @@ export default function(state = {
                 count: action.payload.data.count,
                 previous: action.payload.data.prev,
                 next: action.payload.data.next,
-                shoppinglists: action.payload.data.shoppinglists
+                shoppinglists: _.mapKeys(action.payload.data.shoppinglists, 'list_id')
+            }
+        case SEARCH_SHOPPINGLIST:
+            return{
+                ...state,
+                shoppinglists: _.mapKeys(action.payload.data.shoppinglists, 'list_id')
             }
         case DELETE_ALLSHOPPINGLISTS_SUCCESS:
             return action.payload.data
