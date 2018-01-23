@@ -152,7 +152,7 @@ class ViewItems extends Component {
 }
 function mapStateToProps(state){
     return{
-        oneshoppinglist: state.oneshoppinglist,
+        oneshoppinglist: state.oneshoppinglist.singleShoppingList,
         shoppingitems: state.shoppingitems.shoppingitems,
         count: state.shoppingitems.count,
     };
