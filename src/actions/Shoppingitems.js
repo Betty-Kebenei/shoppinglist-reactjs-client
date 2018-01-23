@@ -10,6 +10,8 @@ export const POST_SHOPPINGITEM_SUCCESS = 'post_shoppingitem_success';
 export const UPDATE_SHOPPINGITEM_SUCCESS = 'update_shoppingitem_success';
 export const DELETE_SHOPPINGITEM_SUCCESS = 'delete_shoppingitem_success';
 export const DELETE_ALLSHOPPINGITEMS_SUCCESS = 'delete_allshoppingitems_success';
+export const PAGINATE_SHOPPINGITEM = 'paginate_shoppingitem';
+export const SEARCH_SHOPPINGITEM = 'search_shoppingitem';
 
 export function getAllShoppingitems(list_id){
     return({
@@ -84,3 +86,18 @@ export function deleteShoppingitem(list_id, item_id){
       toastr.error(error.response.data.message);
     }};
  }
+
+ export function paginateItems(list_id, limit, page){
+  return({
+    type: PAGINATE_SHOPPINGITEM,
+    payload: instance.get(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems?limit=${limit}&page=${page}`)
+  });
+}
+
+
+ export function searchShoppingitem(list_id, term){
+  return({
+    type: SEARCH_SHOPPINGITEM,
+    payload: instance.get(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems?q=${term}`)
+  });
+}
