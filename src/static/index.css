@@ -57,6 +57,12 @@
   border-right: 1px solid black;
 }
 
+.Shoppinglist input {
+  float: right;
+  border-radius: 5px;
+}
+
+
 .ShoppinglistForm {
   background-color:#F5F5F5;
   padding: 25px;
@@ -75,9 +81,6 @@
   min-height: 700px;
 }
 
-.ViewShoppinglist button{
-  float: right;
-}
 
 .ShoppingitemForm, .ViewItems{
   padding: 25px;
@@ -91,5 +94,10 @@
   background-color:#F5F5F5;
   padding: 25px;
   min-height: 700px;
+}
+
+.ViewItems input {
+  float: right;
+  border-radius: 5px;
 }
 
