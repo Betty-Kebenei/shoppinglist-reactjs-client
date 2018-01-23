@@ -7,7 +7,7 @@ import { deleteShoppinglist } from '../../actions/Shoppinglist';
 
 class ViewAShoppinglist extends Component {
     constructor(props){
-        super(props)
+        super(props);
     }
 
     
@@ -22,13 +22,6 @@ class ViewAShoppinglist extends Component {
             <div className="ViewShoppinglist col-sm-8">
                 <div className="row">
                     <div className="col-sm-12">
-                        <button 
-                            onClick={()=>{this.props.deleteShoppinglist(list_id)}}
-                            type="button" 
-                            className="btn glyphicon glyphicon-trash text-primary" 
-                            data-toggle="tooltip" 
-                            data-placement="top" 
-                            title="Delete_list" />
                         <Link 
                             className="btn glyphicon glyphicon-edit text-primary" 
                             data-toggle="tooltip" 
@@ -36,8 +29,16 @@ class ViewAShoppinglist extends Component {
                             title="Update_list"  
                             to={`/shoppinglist/${list_id}/update`}
                             />
+                        <button 
+                            onClick={()=>{this.props.deleteShoppinglist(list_id)}}
+                            type="button" 
+                            className="btn glyphicon glyphicon-trash text-primary" 
+                            data-toggle="tooltip" 
+                            data-placement="top" 
+                            title="Delete_list" />
+                        
                     </div>
-                    <br />
+                    <br /><br />
                     <div className="col-sm-12">
                         <p><b>Shoppinglist_Id:</b>{this.props.oneshoppinglist.data.list_id} </p>
                         <p><b>Shoppinglistname:</b>{this.props.oneshoppinglist.data.listname} </p>
@@ -56,9 +57,8 @@ class ViewAShoppinglist extends Component {
     };
 }
 function mapStateToProps(state){
-    
     return{
-        oneshoppinglist: state.oneshoppinglist
+        oneshoppinglist: state.oneshoppinglist.singleShoppingList,
     };
 }
 
