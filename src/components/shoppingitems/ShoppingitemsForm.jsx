@@ -10,10 +10,7 @@ import toastr from 'toastr';
 import { postShoppingitems } from '../../actions/Shoppingitems'
 
 
-class ShoppingitemsForm extends React.Component {
-    constructor(props){
-        super(props);
-    }
+export class ShoppingitemsForm extends React.Component {
 
     handleSubmit (values){
         const list_id = this.props.oneshoppinglist.data.list_id;
@@ -88,7 +85,7 @@ function validate (values){
 
 function mapStateToProps(state){
     return{
-        oneshoppinglist: state.oneshoppinglist
+        oneshoppinglist: state.oneshoppinglist.singleShoppingList
     }
 }
 
