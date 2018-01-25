@@ -67,7 +67,7 @@ function validate (values){
 }
 function mapStateToProps(state){
     return{
-        oneshoppinglist: state.oneshoppinglist
+        oneshoppinglist: state.oneshoppinglist.singleShoppingList
      } ;
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
@@ -9,14 +9,21 @@ import {
     getAllShoppinglists,
     getOneShoppinglist, 
     deleteShoppinglists,
-    paginateLists
+    paginateLists,
+    searchShoppinglist
  } from '../../actions/Shoppinglist';
 import { getAllShoppingitems } from '../../actions/Shoppingitems';
 
 class ShoppingList extends Component {
     constructor(props){
-        super(props)
-        this.renderShoppinglists = this.renderShoppinglists.bind(this)
+        super(props);
+        this.state = {
+            limit: 5,
+            page: 1,
+            term: ''
+
+        }
+        this.renderShoppinglists = this.renderShoppinglists.bind(this);
     }
     
     componentDidMount(){
@@ -46,7 +53,21 @@ class ShoppingList extends Component {
         if (!this.props.allshoppinglists) {
             return <div>LOADING...</div>
         }
-
+        let pages = [];
+        let numOfPages = Math.floor(this.props.count/this.state.limit);
+        if((this.props.count % this.state.limit) > 0 ){
+            numOfPages +=1
+        }
+        for(let page=1; page<=numOfPages; page++){
+            pages.push(
+                <li 
+                    key={page}
+                    onClick={() => {this.props.paginateLists(this.state.limit, page)}} >
+                    <NavLink to=""> {page}</NavLink>
+                </li>
+            );
+        }
+     
         return(
             <div className="Shoppinglist col-sm-4">
                 <Link className="btn glyphicon glyphicon-plus text-primary" 
@@ -64,21 +85,23 @@ class ShoppingList extends Component {
                     title="Delete_all_lists" 
                     />
                 <br /> <br/>
+                
+                 {/* search a shopping list by listname  */}
+                <input 
+                    placeholder= "search lists"
+                    value = {this.state.term}
+                    onChange={event => this.setState({term: event.target.value}, () => {
+                        this.props.searchShoppinglist(this.state.term);
+                    })} />
+                
+                <br /><br />
+
                 <p><b>Below is the list of your shopping lists:</b></p>
                 <ul className="list-group">
                     {this.renderShoppinglists()}
                 </ul>
-                <button 
-                    onClick={() => {this.props.paginateLists()}}
-                    type="button" 
-                    className="btn btn-primary" >
-                    Previous
-                </button>
-                <button 
-                    type="button" 
-                    className="btn btn-primary" >
-                    Next
-                </button>
+                <ul className="pagination pagination-lg pagination-centered">{pages}</ul>
+                
             </div>
         );
     }
@@ -87,7 +110,9 @@ class ShoppingList extends Component {
 function mapStateToProps(state){
     return{
         allshoppinglists: state.allshoppinglists.shoppinglists,
-        next_page: state.allshoppinglists.next
+        count: state.allshoppinglists.count,
+        next: state.allshoppinglists.next,
+        previous: state.allshoppinglists.previous
      } ;
 }
 function mapDispatchToProps(dispatch){
@@ -96,7 +121,8 @@ function mapDispatchToProps(dispatch){
         getOneShoppinglist,
         getAllShoppingitems, 
         deleteShoppinglists,
-        paginateLists
+        paginateLists,
+        searchShoppinglist
     }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList);

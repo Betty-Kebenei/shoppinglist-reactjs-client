@@ -13,6 +13,7 @@ export const UPDATE_SHOPPINGLIST_SUCCESS = 'update_shoppinglist_success';
 export const DELETE_ALLSHOPPINGLISTS_SUCCESS = 'delete_allshoppinglists_success';
 export const DELETE_ONESHOPPINGLIST_SUCCESS = 'delete_oneshoppinglist_success';
 export const PAGINATE_SHOPPINGLIST = 'paginate_shoppinglist';
+export const SEARCH_SHOPPINGLIST = 'search_shoppinglist';
 
 export function postShoppinglist(values, callback){
   return async (dispatch) => {
@@ -103,4 +104,19 @@ export function paginateLists(limit, page){
     type: PAGINATE_SHOPPINGLIST,
     payload: instance.get(`${ROOT_URL}/shoppinglists?limit=${limit}&page=${page}`)
   });
+}
+
+export function searchShoppinglist(term){
+  return async (dispatch) => {
+    try{
+      const request = await instance.get(`${ROOT_URL}/shoppinglists?q=${term}`)
+
+      dispatch({
+        type: SEARCH_SHOPPINGLIST,
+        payload: request
+      })
+    }catch(error) {
+      toastr.error(error.response.data.message);
+    }
+  }
 }
