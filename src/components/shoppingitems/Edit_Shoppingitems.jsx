@@ -10,10 +10,7 @@ import toastr from 'toastr';
 import { getOneShoppingitem, updateShoppingitems } from '../../actions/Shoppingitems'
 
 
-class Edit_Shoppingitem extends Component {
-    constructor(props){
-        super(props);
-    }
+export class Edit_Shoppingitem extends Component {
 
     handleSubmit (values){
         const list_id = this.props.oneshoppinglist.data.list_id;
