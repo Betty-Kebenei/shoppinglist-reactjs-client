@@ -20,7 +20,10 @@ export function postShoppinglist(values, callback){
     try {
       const request = await instance.post(`${ROOT_URL}/shoppinglists`, values);
 
-      dispatch({type: POST_SHOPPINGLIST_SUCCESS})
+      dispatch({
+        type: POST_SHOPPINGLIST_SUCCESS,
+        payload: request
+      })
       callback()
     }catch(error){
       toastr.error(error.response.data.message); 
