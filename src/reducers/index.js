@@ -18,7 +18,7 @@ const appReducer = combineReducers ({
 
 const rootReducer = (state, action) => {
     if(action.type === NOT_LOGGEDIN ){
-        state == undefined
+        state = undefined
     }
     return appReducer(state, action);
 }
