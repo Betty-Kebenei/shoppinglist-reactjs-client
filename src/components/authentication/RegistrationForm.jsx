@@ -11,7 +11,7 @@ import toastr from 'toastr';
 
 import { createUser } from '../../actions/Registration';
 
-class RegistrationForm extends React.Component {
+export class RegistrationForm extends React.Component {
 
     handleSubmit(values){
         this.props.createUser(values, () => {

@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import toastr from 'toastr';
 
 import { postShoppinglist } from '../../actions/Shoppinglist';
-class ShoppinglistForm extends React.Component{
+
+export class ShoppinglistForm extends React.Component{
 
     handleSubmit(values){
         this.props.postShoppinglist(values, () => {

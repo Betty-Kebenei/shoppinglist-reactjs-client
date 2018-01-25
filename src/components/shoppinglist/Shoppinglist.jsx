@@ -14,7 +14,7 @@ import {
  } from '../../actions/Shoppinglist';
 import { getAllShoppingitems } from '../../actions/Shoppingitems';
 
-class ShoppingList extends Component {
+export class ShoppingList extends Component {
     constructor(props){
         super(props);
         this.state = {

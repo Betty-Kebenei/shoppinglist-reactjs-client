@@ -10,7 +10,7 @@ import toastr from 'toastr';
 
 import { loginUser } from '../../actions/Login';
 
-class LoginForm extends React.Component {
+export class LoginForm extends React.Component {
     
     handleSubmit(values){
         this.props.loginUser(values, () => {
