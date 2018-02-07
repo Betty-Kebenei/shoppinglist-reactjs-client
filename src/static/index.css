@@ -8,7 +8,7 @@
 }
 
 
-.container {
+#container {
   background: url('img_5928.png');
   margin: auto;
   min-height: 750px;
@@ -52,9 +52,9 @@
 
 .Shoppinglist {
   background-color:#F5F5F5;
-  min-height: 700px;
+  min-height: 400px;
   padding-top: 5px;
-  border-right: 1px solid black;
+  min-height: 500px;
 }
 
 .Shoppinglist input {
@@ -66,14 +66,21 @@
 .ShoppinglistForm {
   background-color:#F5F5F5;
   padding: 25px;
-  min-height: 700px;
- 
 } 
 
-.ShoppinglistForm a {
+.ShoppinglistForm button {
   float: right;
 }
 
+.UpdateListForm {
+  background-color:#F5F5F5;
+  padding: 25px;
+  min-height: 700px;
+} 
+
+.UpdateListForm a {
+  float: right;
+}
 
 .ViewShoppinglist {
   background-color:#F5F5F5;
@@ -82,17 +89,24 @@
 }
 
 
-.ShoppingitemForm, .ViewItems{
-  padding: 25px;
+.AddItemForm{
   background-color:#F5F5F5;
+  max-width: 400px;
+  align-content: center;
   float: right;
-  min-height: 700px;
-  height: 100%;
+}
+
+.ListName{
+  text-align: center;
+  margin-top: 50px;
+}
+
+.AddItemForm button{
+  float: right;
 }
 
 .ViewItems {
   background-color:#F5F5F5;
-  padding: 25px;
   min-height: 700px;
 }
 
