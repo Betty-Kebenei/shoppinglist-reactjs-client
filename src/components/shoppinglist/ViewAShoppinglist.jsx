@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { Link } from 'react-router-dom';
 
 import { deleteShoppinglist } from '../../actions/Shoppinglist';
 
-class ViewAShoppinglist extends Component {
-    constructor(props){
-        super(props);
-    }
-
+export class ViewAShoppinglist extends Component {
     
     render(){
         

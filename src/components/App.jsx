@@ -8,8 +8,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { composeWithDevTools } from 'redux-devtools-extension';
-// import { ConnectedRouter, routerReducer, routerMiddleware, push} from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
 import promise from 'redux-promise';
 import reduxThunk from 'redux-thunk';
 
@@ -32,8 +30,6 @@ import ViewItems from './shoppingitems/ViewItems';
 import Edit_Shoppinglist from './shoppinglist/Edit_Shoppinglist';
 import Edit_Shoppingitem from './shoppingitems/Edit_Shoppingitems';
 
-const history = createHistory();
-// const middleware = routerMiddleware(history)
 const createStoreWithMiddleware = composeWithDevTools(applyMiddleware(reduxThunk, promise))(createStore);
 const store = createStoreWithMiddleware(rootReducer);
 const token = localStorage.getItem('access_token');

@@ -11,7 +11,10 @@ export function createUser(values, callback){
         try{
             const request = await axios.post(`${ROOT_URL}/auth/register`, values)
 
-            dispatch({type: REGISTER_USER});
+            dispatch({
+                type: REGISTER_USER,
+                payload: request
+            });
             callback()
         }catch(error){
             toastr.error(error.response.data.message); 

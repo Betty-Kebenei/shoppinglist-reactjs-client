@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 
 import { logoutUser } from '../../actions/Login'
 import { getAllShoppinglists } from '../../actions/Shoppinglist';
-class Header extends Component {
+
+export class Header extends Component {
 
     componentWillMount(){
         this.props.getAllShoppinglists();

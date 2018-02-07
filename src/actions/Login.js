@@ -1,6 +1,4 @@
 import axios from 'axios';
-import instance from './AxiosInstance';
-
 import toastr from 'toastr';
 
 export const NOT_LOGGEDIN = 'not_loggedin';
