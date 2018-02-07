@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { logoutUser } from '../../actions/Login'
-import { getAllShoppinglists } from '../../actions/Shoppinglist';
+import { getAllShoppinglists } from '../../actions/ShoppingLists';
 
 export class Header extends Component {
 
@@ -18,7 +18,6 @@ export class Header extends Component {
     renderChange(){
         if(this.props.authenticated){
             return (
-                
                 <Link onClick={this.onLogoutClick.bind(this)} className="btn btn-primary" to="/auth/logout">
                 Logout
                 </Link>
