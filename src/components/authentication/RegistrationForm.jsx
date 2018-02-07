@@ -2,6 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import RenderField from '../common/RenderField';
+import validate from '../common/Validation';
 
 const RegistrationForm = (props) => {
     const { handleSubmit, onSubmit } = props;
@@ -40,34 +41,12 @@ const RegistrationForm = (props) => {
                 />
                 <button type="submit" className="btn btn-primary">Submit</button>
                 <Link className="btn btn-primary" to="/auth/login">
-                Sign In
+                Cancel
                 </Link> 
             </form>
         </div> 
     );
 }
-
-const validate = (values) => {
-    //Validate the form inputs.
-    const errors = {};
-    if(!values.username || values.username.length < 3){
-        errors.username = "Please provide a username with a min length of 3!";
-    }
-    if(!values.email){
-        errors.email = "Please provide an email!";
-    }
-    if(!values.password || values.password.length < 6 ){
-        errors.password = "Please provide a password with a length of atleast 6!";
-    }
-    if(!values.repeat_password){
-        errors.repeat_password = "Please confirm your password!";
-    }
-    if (values.password !== values.repeat_password){
-        errors.repeat_password = "Confirm Password must much password!!";
-    }
-    return errors;
-}
-
 export default reduxForm({
     validate,
     form: 'RegistrationForm'

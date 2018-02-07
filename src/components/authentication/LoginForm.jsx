@@ -2,6 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import RenderField from '../common/RenderField';
+import validate from '../common/Validation';
 
 const LoginForm = (props) => {
     const {handleSubmit, onSubmit} = props;
@@ -32,20 +33,6 @@ const LoginForm = (props) => {
         </div>  
     )
 }
-const validate = (values) => {
-    //Validate the form inputs.
-    const errors = {};
-
-    if(!values.email){
-        errors.email = "Please provide an email!";
-    }
-    if(!values.password){
-        errors.password = "Please provide a password!";
-    }
-    return errors;
-
-}
-
 export default reduxForm({
     validate,
     form: 'LoginForm'

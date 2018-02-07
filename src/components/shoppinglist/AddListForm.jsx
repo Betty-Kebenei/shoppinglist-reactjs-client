@@ -4,8 +4,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import RenderField from '../common/RenderField';
-
-
+import validate from '../common/Validation';
 
 export const AddListForm = (props) => {
     const { handleSubmit, onSubmit } = props;
@@ -32,16 +31,6 @@ export const AddListForm = (props) => {
         </div>
     )
 }
-
-function validate (values){
-    const errors = {};
-    if(!values.listname){
-        errors.listname = "Please provide a listname!";
-    }
-    return errors;
-
-}
-
 export default reduxForm({
     validate,
     form: 'AddListForm'

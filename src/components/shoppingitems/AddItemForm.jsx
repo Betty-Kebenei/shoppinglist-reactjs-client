@@ -4,6 +4,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import RenderField from '../common/RenderField';
+import validate from '../common/Validation';
 
 const AddItemForm = (props) => {
     const { handleSubmit, onSubmit, listId } = props;
@@ -47,15 +48,6 @@ const AddItemForm = (props) => {
             </div>
         );
     }
-
-function validate (values){
-    const errors = {};
-    if(!values.itemname){
-        errors.itemname = "Please provide an itemname!";
-    }
-    return errors;
-
-}
 
 export default reduxForm({
     validate,

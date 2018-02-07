@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 
 import RenderField from '../common/RenderField';
+import validate from '../common/Validation';
 
 const UpdateItemForm = (props) => {
         const { handleSubmit, onSubmit, listId } = props;
@@ -46,16 +47,6 @@ const UpdateItemForm = (props) => {
         </div>
     );
 }
-
-const validate = (values) => {
-    const errors = {};
-    if(!values.itemname){
-        errors.itemname = "Please provide an itemname!";
-    }
-    return errors;
-
-}
-
 export default reduxForm({
     validate,
     form: 'UpdateItemForm'
