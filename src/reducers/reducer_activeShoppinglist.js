@@ -1,4 +1,4 @@
-import {  GET_ONESHOPPINGLIST_SUCCESS, UPDATE_SHOPPINGLIST_SUCCESS } from '../actions/Shoppinglist';
+import {  GET_ONESHOPPINGLIST_SUCCESS, UPDATE_SHOPPINGLIST_SUCCESS } from '../actions/ShoppingLists';
 
 export default function(state = {}, action) {
     switch(action.type) {

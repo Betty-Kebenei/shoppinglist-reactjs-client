@@ -8,16 +8,27 @@ import {
     DELETE_ALLSHOPPINGITEMS_SUCCESS,
     PAGINATE_SHOPPINGITEM,
     SEARCH_SHOPPINGITEM
-} from '../actions/Shoppingitems';
+} from '../actions/ShoppingItems';
 
-export default function(state = {}, action) {
+export default function(state = {
+    shoppingitems : {},
+}, action) {
     switch(action.type) {
         case GET_ALLSHOPPINGITEMS_SUCCESS:
+        if(action.payload.data){
             return {
                 ...state,
-                count: action.payload.data.count,
+                count:action.payload.data.count,
                 shoppingitems: _.mapKeys(action.payload.data.shoppingitems, 'item_id')
-            } 
+         } 
+        }else{
+            return {
+                ...state,
+                count:0,
+                shoppingitems: {}
+         } 
+        }
+            
         case GET_ONESHOPPINGITEM_SUCCESS:
             return {
                 ...state,
@@ -28,19 +39,18 @@ export default function(state = {}, action) {
         case UPDATE_SHOPPINGITEM_SUCCESS:
             return {
                 ...state,
-                updateSuccess: action.payload.data
+                shoppingitem: action.payload.data
             }
         case PAGINATE_SHOPPINGITEM:
-            return{
+            return  {
                 ...state,
                 count: action.payload.data.count,
-                previous: action.payload.data.prev,
-                next: action.payload.data.next,
                 shoppingitems: _.mapKeys(action.payload.data.shoppingitems, 'item_id')
             }
         case SEARCH_SHOPPINGITEM:
-            return{
+            return  {
                 ...state,
+                count: action.payload.data.count,
                 shoppingitems: _.mapKeys(action.payload.data.shoppingitems, 'item_id')
             }
         case DELETE_SHOPPINGITEM_SUCCESS:
