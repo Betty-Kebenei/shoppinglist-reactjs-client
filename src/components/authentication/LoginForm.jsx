@@ -1,71 +1,38 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
-import '../../static/index.css';
-
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import toastr from 'toastr';
+import RenderField from '../common/RenderField';
 
-import { loginUser } from '../../actions/Login';
+const LoginForm = (props) => {
+    const {handleSubmit, onSubmit} = props;
 
-export class LoginForm extends React.Component {
-    
-    handleSubmit(values){
-        this.props.loginUser(values, () => {
-            this.props.history.push('/');
-            toastr.success("You are successfully logged in!")
-        });
-        this.props.reset(); 
-    }  
-
-    renderField(field){
-        const {meta: {touched, error}} = field;
-        const className = `form-group ${ touched && error ? 'has-danger' : ''}`;
-        return(
-            <div className={className}>
-                <input
-                className = "form-control"
-                placeholder = {field.placeholder}
-                type = {field.type}
-                {...field.input}
+    return(
+        <div className="Login">
+            <form className="LoginForm" onSubmit={handleSubmit(onSubmit)}>
+                <h2>Sign In</h2><br />
+                <Field
+                    label = "Email"
+                    placeholder = "email"
+                    name = "email"
+                    type = "text"
+                    component = {RenderField}
                 />
-                <div className="text-help">
-                    { touched ? error : '' }
-                </div>
-            </div>
-        );
-    }
-
-    render(){
-        const { handleSubmit } = this.props;
-        return(
-            <div className="Login">
-                <form className="LoginForm" onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
-                    <h2>Sign In</h2><br />
-                    <Field
-                        placeholder = "email"
-                        name = "email"
-                        type = "text"
-                        component = {this.renderField}
-                    />
-                    <Field
-                        placeholder = "password"
-                        name = "password"
-                        type="password"
-                        component = {this.renderField}
-                    />
-                    <button type="submit" className="btn btn-primary">Submit</button> 
-                    <Link className="btn btn-primary" to="/auth/register">
-                    Sign up
-                    </Link> 
-                </form>
-            </div>  
-        )
-    }
+                <Field
+                    label = "Password"
+                    placeholder = "password"
+                    name = "password"
+                    type="password"
+                    component = {RenderField}
+                />
+                <button type="submit" className="btn btn-primary">Submit</button> 
+                <Link className="btn btn-primary" to="/auth/register">
+                Sign up
+                </Link> 
+            </form>
+        </div>  
+    )
 }
-function validate (values){
+const validate = (values) => {
     //Validate the form inputs.
     const errors = {};
 
@@ -82,6 +49,4 @@ function validate (values){
 export default reduxForm({
     validate,
     form: 'LoginForm'
-})(
-    connect(null, {loginUser} )(LoginForm)
-);
+})(LoginForm);
