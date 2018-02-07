@@ -5,10 +5,10 @@ import {
     DELETE_ONESHOPPINGLIST_SUCCESS,
     PAGINATE_SHOPPINGLIST,
     SEARCH_SHOPPINGLIST
- } from '../actions/Shoppinglist';
+ } from '../actions/ShoppingLists';
 
 export default function(state = {
-    shoppinglists : [],
+    shoppinglists : {},
     next : null,
     previous : null
 }, action) {
@@ -17,21 +17,18 @@ export default function(state = {
             return{
                 ...state,
                 count: action.payload.data.count,
-                previous: action.payload.data.prev,
-                next: action.payload.data.next,
                 shoppinglists: _.mapKeys(action.payload.data.shoppinglists, 'list_id')
             }
         case PAGINATE_SHOPPINGLIST:
             return{
                 ...state,
                 count: action.payload.data.count,
-                previous: action.payload.data.prev,
-                next: action.payload.data.next,
                 shoppinglists: _.mapKeys(action.payload.data.shoppinglists, 'list_id')
             }
         case SEARCH_SHOPPINGLIST:
             return{
                 ...state,
+                count: action.payload.data.count,
                 shoppinglists: _.mapKeys(action.payload.data.shoppinglists, 'list_id')
             }
         case DELETE_ALLSHOPPINGLISTS_SUCCESS:

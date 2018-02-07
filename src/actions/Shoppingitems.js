@@ -27,7 +27,7 @@ export function getOneShoppingitem(list_id, item_id){
   });
 }
 
-export function postShoppingitems(list_id, values, callback){
+export function postShoppingitems(list_id, values){
   return async (dispatch) => {
     try {
       const request = await instance.post(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems`, values);
@@ -35,15 +35,15 @@ export function postShoppingitems(list_id, values, callback){
       dispatch({
         type: POST_SHOPPINGITEM_SUCCESS,
         payload: request
-      });
-      callback()
+      })
+      window.location.reload();
     } catch(error) {
       toastr.error(error.response.data.message); 
     }
   };
 }
 
-export function updateShoppingitems(list_id, item_id, values){
+export function updateShoppingitems(list_id, item_id, values, callback){
   return async (dispatch) => {
     try {
       const request = await instance.put(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems/${item_id}`, values);
@@ -52,6 +52,7 @@ export function updateShoppingitems(list_id, item_id, values){
         type: UPDATE_SHOPPINGITEM_SUCCESS,
         payload: request
       })
+      callback()
     }catch(error){
       toastr.error(error.response.data.message);
     }
@@ -67,13 +68,13 @@ export function deleteShoppingitem(list_id, item_id){
         type: DELETE_SHOPPINGITEM_SUCCESS,
         payload: request
       })
-      window.location.reload()
+      window.location.reload();
     }catch(error){
       toastr.error(error.response.data.message);
     }};
  }
 
- export function deleteAllShoppingitems(list_id){
+export function deleteAllShoppingitems(list_id){
   return async (dispatch) => {
     try {
       const request = await instance.delete(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems`)
@@ -87,7 +88,7 @@ export function deleteShoppingitem(list_id, item_id){
     }};
  }
 
- export function paginateItems(list_id, limit, page){
+export function paginateItems(list_id, limit, page){
   return({
     type: PAGINATE_SHOPPINGITEM,
     payload: instance.get(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems?limit=${limit}&page=${page}`)

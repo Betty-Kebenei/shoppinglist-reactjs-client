@@ -24,7 +24,9 @@ export function postShoppinglist(values, callback){
         type: POST_SHOPPINGLIST_SUCCESS,
         payload: request
       })
-      callback()
+
+      dispatch(getAllShoppinglists())
+
     }catch(error){
       toastr.error(error.response.data.message); 
     }
