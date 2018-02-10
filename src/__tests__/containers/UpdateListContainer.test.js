@@ -13,8 +13,10 @@ import { UpdateListContainer } from '../../components/containers/UpdateListConta
 describe('UpdateListContainer', () => {
     let store;
     let props = {
-        updateList: () => {} ,
-        listId: 1
+        updateList: () => {},
+        updateShoppinglist: () => {},
+        getOneShoppinglist: () => {},
+        match: {params: {id: 1}}
     }
     beforeEach(() => {
         store = mockStore({});
@@ -28,11 +30,10 @@ describe('UpdateListContainer', () => {
             </Provider>
           );
         expect(Wrapper.find('div').length).toBeGreaterThan(0);
-        expect(Wrapper.instance().updateList()).equals(true);
     });
     it("always has updateList function", () => {
-    const Wrapper = shallow(<UpdateListContainer {...props} />)
-    Wrapper.instance().updateList();
+        const Wrapper = shallow(<UpdateListContainer {...props} />)
+        Wrapper.instance().updateList();
     });
 });
 
