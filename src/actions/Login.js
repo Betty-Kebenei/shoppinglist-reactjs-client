@@ -22,30 +22,6 @@ export function loginUser(values, callback){
 }
 
 export function logoutUser(){
-    return async (dispatch) => {
-        try {
-            //const request = await instance.post(`${ROOT_URL}/auth/logout`);
-
-            dispatch(
-                {
-                    type: NOT_LOGGEDIN
-                }
-            );
-            localStorage.clear();
-            window.location.reload()
-        }catch(error){           
-            dispatch(
-                {
-                    type: LOGOUT_ERROR,
-                    payload: error.response.data.message
-                    
-                }
-            );
-        }
-    };
-}
-
-export function logout(){
     localStorage.clear();
     return({
         type: NOT_LOGGEDIN
