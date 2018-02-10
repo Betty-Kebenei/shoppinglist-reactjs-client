@@ -11,9 +11,9 @@ import {
     SEARCH_SHOPPINGITEM_ERROR
 } from '../actions/ShoppingItems';
 
-export default function(state = {
+export default (state = {
     shoppingitems : {},
-}, action) {
+}, action) => {
     switch(action.type) {
         case GET_ALLSHOPPINGITEMS_SUCCESS:
         if(action.payload.data){
