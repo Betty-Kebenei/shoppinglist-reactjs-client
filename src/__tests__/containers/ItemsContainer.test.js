@@ -13,9 +13,7 @@ import { ItemsContainer } from '../../components/containers/ItemsContainer';
 describe('ItemsContainer', () => {
     let store;
     const props = {
-        match: "1/shoppingitems",
-        params: "id: 1",
-        listId: 1,
+        match: { params: {id: 1}},
         getAllShoppingitems: () => {},
         getOneShoppinglist: () => {},
         postShoppingitems: () => {},
@@ -35,6 +33,8 @@ describe('ItemsContainer', () => {
           );
         expect(Wrapper.find('div').length).toBeGreaterThan(0);
         expect(Wrapper.find('input').length).toBeGreaterThan(0);
+        expect(Wrapper.find('button').length).toBeGreaterThan(0);
+        expect(Wrapper.find('Link').length).toBeGreaterThan(0);
       });
       it("always has functions", () => {
         const Wrapper = shallow(<ItemsContainer {...props} />)
