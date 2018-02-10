@@ -6,10 +6,16 @@ import toastr from 'toastr';
 
 import UpdateItemForm from '../shoppingitems/UpdateItemForm';
 
-import { updateShoppingitems } from '../../actions/ShoppingItems'
+import { updateShoppingitems, getOneShoppingitem } from '../../actions/ShoppingItems'
 
 
 export class UpdateItemContainer extends Component {
+
+    componentDidMount(){
+        const { id } = this.props.match.params;
+        const { itemid } = this.props.match.params;
+        this.props.getOneShoppingitem(id, itemid);
+    }
 
     updateItem = (values) => {
         const { id } = this.props.match.params;
@@ -21,15 +27,27 @@ export class UpdateItemContainer extends Component {
     }
      
     render(){
+        if(!this.props.shoppingitem){
+            return(<div>Loading....</div>);
+        }
+
+        const { itemname , quantity, units, price, currency } = this.props.shoppingitem
         return(
+            
             <div>
                 <UpdateItemForm
                     onSubmit={this.updateItem}
                     listId={this.props.match.params.id}
+                    initialValues={{ itemname , quantity, units, price, currency }}
                 />
             </div>
         );
     }
 }
+const mapStateToProps = (state) => {
+    return{
+        shoppingitem: state.shoppingitems.shoppingitem
+    }
+}
 
-export default connect(null, { updateShoppingitems })(UpdateItemContainer);
+export default connect(mapStateToProps, { updateShoppingitems, getOneShoppingitem })(UpdateItemContainer);
