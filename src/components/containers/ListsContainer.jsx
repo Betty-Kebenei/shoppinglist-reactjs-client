@@ -1,3 +1,6 @@
+import { confirmAlert } from 'react-confirm-alert'; 
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import toastr from 'toastr';
@@ -57,11 +60,25 @@ export class ListsContainer extends Component {
     }
 
     deleteOneShoppingList = (listId) => {
-        this.props.deleteShoppinglist(listId);
+        confirmAlert({
+            title: 'Confirm to DELETE',                       
+            message: 'Are you sure you want to DELETE?',                 
+            confirmLabel: 'Yes',                           
+            cancelLabel: 'No',                             
+            onConfirm: () => this.props.deleteShoppinglist(listId),    
+            onCancel: () => '',      
+        });
     }
 
     deleteAllShoppingLists = () => {
-        this.props.deleteShoppinglists();
+        confirmAlert({
+            title: 'Confirm to DELETE',                       
+            message: 'Are you sure you want to DELETE?',                 
+            confirmLabel: 'Yes',                           
+            cancelLabel: 'No',                             
+            onConfirm: () => this.props.deleteShoppinglists(),    
+            onCancel: () => '',      
+        });
     }
 
     render(){
@@ -78,12 +95,13 @@ export class ListsContainer extends Component {
                     onChange={event => this.setState({term: event.target.value}, () => {
                     this.props.searchShoppinglist(this.state.term);
                 })} />
-
+                
                 <ViewLists 
                     shoppinglists={this.props.allshoppinglists}
                     onSearch={this.searchShoppingLists}
                     deleteOneShoppingList={this.deleteOneShoppingList}
                     deleteAllShoppingLists={this.deleteAllShoppingLists}
+                    searchError={this.props.errorMessage}
                 />
 
                 <PaginateLists
@@ -91,7 +109,7 @@ export class ListsContainer extends Component {
                     limit={this.state.limit}
                     onPaginateLists={this.paginateShoppingLists}
                 />
-    
+
             </div>
         );
     }
@@ -102,8 +120,7 @@ function mapStateToProps(state){
         oneshoppinglist: state.oneshoppinglist.singleShoppingList,
         allshoppinglists: state.allshoppinglists.shoppinglists,
         count: state.allshoppinglists.count,
-        next: state.allshoppinglists.next,
-        previous: state.allshoppinglists.previous
+        errorMessage: state.allshoppinglists.errorMessage
      } ;
 }
 function mapDispatchToProps(dispatch){
