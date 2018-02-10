@@ -4,7 +4,8 @@ import {
     DELETE_ALLSHOPPINGLISTS_SUCCESS, 
     DELETE_ONESHOPPINGLIST_SUCCESS,
     PAGINATE_SHOPPINGLIST,
-    SEARCH_SHOPPINGLIST
+    SEARCH_SHOPPINGLIST,
+    SEARCH_SHOPPINGLIST_ERROR
  } from '../actions/ShoppingLists';
 
 export default function(state = {
@@ -29,8 +30,14 @@ export default function(state = {
             return{
                 ...state,
                 count: action.payload.data.count,
-                shoppinglists: _.mapKeys(action.payload.data.shoppinglists, 'list_id')
+                shoppinglists:  _.mapKeys(action.payload.data.shoppinglists, 'list_id'),
+                errorMessage: ''
             }
+        case SEARCH_SHOPPINGLIST_ERROR:
+            return {
+                state: {},
+                errorMessage: action.payload.response.data.message
+            } 
         case DELETE_ALLSHOPPINGLISTS_SUCCESS:
             return action.payload.data
         case DELETE_ONESHOPPINGLIST_SUCCESS:
