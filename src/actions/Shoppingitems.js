@@ -14,21 +14,21 @@ export const PAGINATE_SHOPPINGITEM = 'paginate_shoppingitem';
 export const SEARCH_SHOPPINGITEM = 'search_shoppingitem';
 export const SEARCH_SHOPPINGITEM_ERROR = 'search_shoppingitem_error';
 
-export function getAllShoppingitems(list_id){
+export const getAllShoppingitems = (list_id) => {
     return({
        type: GET_ALLSHOPPINGITEMS_SUCCESS,
        payload: instance.get(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems`)
      });
 }
 
-export function getOneShoppingitem(list_id, item_id){
+export const getOneShoppingitem = (list_id, item_id) => {
  return({
     type: GET_ONESHOPPINGITEM_SUCCESS,
     payload: instance.get(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems/${item_id}`)
   });
 }
 
-export function postShoppingitems(list_id, values){
+export const postShoppingitems = (list_id, values) => {
   return async (dispatch) => {
     try {
       const request = await instance.post(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems`, values);
@@ -44,7 +44,7 @@ export function postShoppingitems(list_id, values){
   };
 }
 
-export function updateShoppingitems(list_id, item_id, values, callback){
+export const updateShoppingitems = (list_id, item_id, values, callback) => {
   return async (dispatch) => {
     try {
       const request = await instance.put(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems/${item_id}`, values);
@@ -60,7 +60,7 @@ export function updateShoppingitems(list_id, item_id, values, callback){
   }; 
 }
 
-export function deleteShoppingitem(list_id, item_id){
+export const deleteShoppingitem = (list_id, item_id) => {
   return async (dispatch) => {
     try {
       const request = await instance.delete(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems/${item_id}`)
@@ -75,21 +75,21 @@ export function deleteShoppingitem(list_id, item_id){
     }};
  }
 
-export function deleteAllShoppingitems(list_id){
+export const deleteAllShoppingitems = (list_id) => {
   return({
     type: DELETE_ALLSHOPPINGITEMS_SUCCESS,
     payload: instance.delete(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems`)
   });
  }
 
-export function paginateItems(list_id, limit, page){
+export const paginateItems = (list_id, limit, page) => {
   return({
     type: PAGINATE_SHOPPINGITEM,
     payload: instance.get(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems?limit=${limit}&page=${page}`)
   });
 }
 
-export function searchShoppingitem(list_id, term){
+export const searchShoppingitem = (list_id, term) => {
   return async (dispatch) => {
     try{
       const request = await instance.get(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems?q=${term}`)

@@ -1,6 +1,6 @@
 import {  GET_ONESHOPPINGLIST_SUCCESS, UPDATE_SHOPPINGLIST_SUCCESS } from '../actions/ShoppingLists';
 
-export default function(state = {}, action) {
+export default (state = {}, action) => {
     switch(action.type) {
         case GET_ONESHOPPINGLIST_SUCCESS:
             return {

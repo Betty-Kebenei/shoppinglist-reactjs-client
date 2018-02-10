@@ -6,7 +6,7 @@ export const REGISTER_USER = 'register_user';
 
 const ROOT_URL = 'http://localhost:5000'
 
-export function createUser(values, callback){
+export const createUser = (values, callback) => {
     return async (dispatch) => {
         try{
             const request = await axios.post(`${ROOT_URL}/auth/register`, values)

@@ -7,7 +7,7 @@ export const LOGOUT_ERROR = 'logout_error';
 
 const ROOT_URL = 'http://localhost:5000';
 
-export function loginUser(values, callback){
+export const loginUser = (values, callback) => {
     return async (dispatch) => {
         try {
             const request = await axios.post(`${ROOT_URL}/auth/login`, values);
@@ -21,7 +21,7 @@ export function loginUser(values, callback){
     };
 }
 
-export function logoutUser(){
+export const logoutUser = () => {
     localStorage.clear();
     return({
         type: NOT_LOGGEDIN

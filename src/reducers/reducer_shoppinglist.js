@@ -8,11 +8,11 @@ import {
     SEARCH_SHOPPINGLIST_ERROR
  } from '../actions/ShoppingLists';
 
-export default function(state = {
+export default (state = {
     shoppinglists : {},
     next : null,
     previous : null
-}, action) {
+}, action) => {
     switch(action.type) {
         case GET_ALLSHOPPINGLISTS_SUCCESS:
             return{

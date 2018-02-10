@@ -45,9 +45,8 @@ export class UpdateItemContainer extends Component {
     }
 }
 const mapStateToProps = (state) => {
-    return{
-        shoppingitem: state.shoppingitems.shoppingitem
-    }
+    const { shoppingitem } = state.shoppingitems;
+    return { shoppingitem }
 }
 
 export default connect(mapStateToProps, { updateShoppingitems, getOneShoppingitem })(UpdateItemContainer);

@@ -8,7 +8,7 @@ import RenderField from '../common/RenderField';
 import validate from '../common/Validation';
 
 export const UpdateListForm = (props) => {
-    const { handleSubmit, onSubmit, listName, initialValues } = props;
+    const { handleSubmit, onSubmit, initialValues } = props;
     return(
         <div>
             <form className="UpdateListForm col-sm-12" onSubmit={handleSubmit(onSubmit)}>

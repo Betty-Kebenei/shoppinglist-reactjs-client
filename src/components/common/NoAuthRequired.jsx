@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-export default function (ComposedComponent) {
+export default (ComposedComponent) => {
   class NotAuth extends Component {
     componentWillMount() {
       if (this.props.authenticated) {
@@ -25,8 +25,9 @@ export default function (ComposedComponent) {
     }
   }
 
-  function mapStateToProps(state) {
-    return { authenticated: state.user.authenticated };
+  const mapStateToProps = (state) => {
+    const { authenticated } = state.user;
+    return { authenticated };
   }
 
   return connect(mapStateToProps)(NotAuth);

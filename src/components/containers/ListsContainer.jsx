@@ -45,7 +45,7 @@ export class ListsContainer extends Component {
     }
 
     updateShoppinglist = (values) => {
-        const { list_id } = this.props.oneshoppinglist.data;
+        const { list_id } = this.props.singleShoppingList.data;
         this.props.updateShoppinglist(list_id, values, () => {
             toastr.success('Shopping list successfully updated!');
         });
@@ -115,16 +115,20 @@ export class ListsContainer extends Component {
     }
 }
 
-function mapStateToProps(state){
+const mapStateToProps = (state) => {
+    const { singleShoppingList } = state.oneshoppinglist;
+    const { shoppinglists, count, errorMessage } = state.allshoppinglists;
     return{
-        oneshoppinglist: state.oneshoppinglist.singleShoppingList,
-        allshoppinglists: state.allshoppinglists.shoppinglists,
-        count: state.allshoppinglists.count,
-        errorMessage: state.allshoppinglists.errorMessage
+        singleShoppingList,
+        shoppinglists,
+        count,
+        errorMessage
      } ;
 }
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({ 
+
+export default connect(
+    mapStateToProps, 
+    {
         postShoppinglist,
         getAllShoppinglists,
         getOneShoppinglist,
@@ -133,6 +137,4 @@ function mapDispatchToProps(dispatch){
         deleteShoppinglists,
         paginateLists,
         searchShoppinglist
-    }, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(ListsContainer);
+    })(ListsContainer);

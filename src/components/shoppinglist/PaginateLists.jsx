@@ -8,8 +8,6 @@ const PaginateLists = (props) => {
         onPaginateLists
     } = props;
 
-    
-
     //Formulating numbers for pages of shopping lists
     let pages = [];
     let numOfPages = Math.floor(count/limit);
