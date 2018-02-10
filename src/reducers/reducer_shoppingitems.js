@@ -7,7 +7,8 @@ import {
     DELETE_SHOPPINGITEM_SUCCESS,
     DELETE_ALLSHOPPINGITEMS_SUCCESS,
     PAGINATE_SHOPPINGITEM,
-    SEARCH_SHOPPINGITEM
+    SEARCH_SHOPPINGITEM,
+    SEARCH_SHOPPINGITEM_ERROR
 } from '../actions/ShoppingItems';
 
 export default function(state = {
@@ -51,7 +52,13 @@ export default function(state = {
             return  {
                 ...state,
                 count: action.payload.data.count,
-                shoppingitems: _.mapKeys(action.payload.data.shoppingitems, 'item_id')
+                shoppingitems: _.mapKeys(action.payload.data.shoppingitems, 'item_id'),
+                errorMessage: ''
+            }
+        case SEARCH_SHOPPINGITEM_ERROR:
+            return {
+                state: {},
+                errorMessage: action.payload.response.data.message
             }
         case DELETE_SHOPPINGITEM_SUCCESS:
             return action.payload
