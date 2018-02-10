@@ -12,6 +12,7 @@ const ViewShoppingLists = (props) => {
         deleteOneShoppingList,
         deleteAllShoppingLists,
         onSearch,
+        searchError
      } = props;
 
     const renderShoppinglists = () =>  (
@@ -46,7 +47,7 @@ const ViewShoppingLists = (props) => {
                             data-placement="top" 
                             title="Delete_item" 
                             />  
-                    </td>
+                    </td>                  
                 </tr>
                 
             );
@@ -64,7 +65,7 @@ const ViewShoppingLists = (props) => {
                 title="Delete_all_lists" 
                 />
             <br /> <br/>
-
+            
             <h2>Shopping Lists:</h2>
             
             <div className="col-sm-12">
@@ -80,6 +81,7 @@ const ViewShoppingLists = (props) => {
                         {renderShoppinglists()}
                     </tbody>
                 </table>
+                {searchError}
             </div>
         </div>
     );
