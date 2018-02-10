@@ -15,7 +15,6 @@ export const UpdateListForm = (props) => {
                 <Field
                     label = "Update List Name"
                     name = "listname"
-                    value = "gghh"
                     component = {RenderField}
                 />
                 <button type="submit" className="btn btn-primary">Update List</button>
