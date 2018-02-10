@@ -23,15 +23,14 @@ export class UpdateListContainer extends Component{
     }
 
     render(){
-        if(!this.props.shoppinglist){
+        if(!this.props.singleShoppingList){
             return(<div>Loading....</div>);
         }
-        const { listname } = this.props.shoppinglist.data
+        const { listname } = this.props.singleShoppingList.data
         return(
             <div>
                 <UpdateListForm 
                     onSubmit={this.updateList}
-                    listnName={this.props.match.params.listname}
                     initialValues={{ listname }}
                 />
             </div>
@@ -39,9 +38,8 @@ export class UpdateListContainer extends Component{
     }
 }
 const mapStateToProps = (state) => {
-    return{
-        shoppinglist: state.oneshoppinglist.singleShoppingList
-    }
+    const { singleShoppingList } = state.oneshoppinglist;
+    return { singleShoppingList }
 }
 
 export default connect(mapStateToProps, { getOneShoppinglist, updateShoppinglist })(UpdateListContainer);

@@ -39,9 +39,8 @@ export class Header extends Component {
         )
     }
 }
-function mapStateToProps(state){
-    return {
-        authenticated: state.user.authenticated
-    };
+const mapStateToProps = (state) => {
+    const { authenticated } = state.user;
+    return { authenticated };
 }
 export default connect(mapStateToProps, {getAllShoppinglists, logoutUser})(Header);

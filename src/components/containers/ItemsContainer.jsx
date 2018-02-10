@@ -115,7 +115,7 @@ export class ItemsContainer extends Component {
                                     listId={listId}
                                     shoppingItems={this.props.shoppingitems}
                                     onDelete={this.deleteShoppingItem}
-                                    searchError={this.props.searchError}
+                                    searchError={this.props.errorMessage}
                                 />
                                 <PaginateItems
                                     listId={listId}
@@ -133,15 +133,18 @@ export class ItemsContainer extends Component {
     };
 }
 const mapStateToProps = (state) => {
-    return{
-        oneshoppinglist: state.oneshoppinglist.singleShoppingList,
-        shoppingitems: state.shoppingitems.shoppingitems,
-        count: state.shoppingitems.count,
-        searchError: state.shoppingitems.errorMessage
+    const { singleShoppingList } = state.oneshoppinglist;
+    const { shoppingitems, count, errorMessage } = state.shoppingitems;
+    return {
+        singleShoppingList,
+        shoppingitems,
+        count,
+        errorMessage
     };
 }
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({
+
+export default connect(
+    mapStateToProps, {
         postShoppingitems,
         getOneShoppinglist,
         getAllShoppingitems,
@@ -149,7 +152,4 @@ const mapDispatchToProps = (dispatch) => {
         deleteShoppingitem,
         paginateItems,
         searchShoppingitem
-    }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ItemsContainer);
+    })(ItemsContainer);
