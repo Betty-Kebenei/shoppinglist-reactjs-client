@@ -17,7 +17,7 @@ export const SEARCH_SHOPPINGLIST = 'search_shoppinglist';
 export const SEARCH_SHOPPINGLIST_ERROR = 'search_shoppinglist_error';
 export const NOT_LOGGEDIN = 'not_loggedin';
 
-export function postShoppinglist(values, callback){
+export const postShoppinglist = (values, callback) => {
   return async (dispatch) => {
     try {
       const request = await instance.post(`${ROOT_URL}/shoppinglists`, values);
@@ -35,7 +35,7 @@ export function postShoppinglist(values, callback){
   }; 
 }
 
-export function updateShoppinglist(list_id, values, callback){
+export const updateShoppinglist = (list_id, values, callback) =>{
   return async (dispatch) => {
     try {
       const request = await instance.put(`${ROOT_URL}/shoppinglists/${list_id}`, values);
@@ -51,7 +51,7 @@ export function updateShoppinglist(list_id, values, callback){
   }; 
 }
 
-export function getAllShoppinglists(){
+export const getAllShoppinglists = () => {
   return async (dispatch) => {
     try{
       const request = await instance.get(`${ROOT_URL}/shoppinglists`);
@@ -68,21 +68,21 @@ export function getAllShoppinglists(){
   }
 }
 
-export function getOneShoppinglist(id){
+export const getOneShoppinglist = (id) => {
   return({
     type: GET_ONESHOPPINGLIST_SUCCESS,
     payload: instance.get(`${ROOT_URL}/shoppinglists/${id}`)
   });
 }
 
-export function deleteShoppinglists(){
+export const deleteShoppinglists = () => {
   return({
     type: DELETE_ALLSHOPPINGLISTS_SUCCESS,
     payload: instance.delete(`${ROOT_URL}/shoppinglists`)
   });
 }
 
-export function deleteShoppinglist(list_id){
+export const deleteShoppinglist = (list_id) => {
   return async (dispatch) => {
     try {
       const request = await instance.delete(`${ROOT_URL}/shoppinglists/${list_id}`)
@@ -97,14 +97,14 @@ export function deleteShoppinglist(list_id){
     }};
  }
 
-export function paginateLists(limit, page){
+export const paginateLists = (limit, page) => {
   return({
     type: PAGINATE_SHOPPINGLIST,
     payload: instance.get(`${ROOT_URL}/shoppinglists?limit=${limit}&page=${page}`)
   });
 }
 
-export function searchShoppinglist(term){
+export const searchShoppinglist = (term) =>{
   return async (dispatch) => {
     try{
       const request = await instance.get(`${ROOT_URL}/shoppinglists?q=${term}`)
