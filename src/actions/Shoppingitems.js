@@ -12,6 +12,7 @@ export const DELETE_SHOPPINGITEM_SUCCESS = 'delete_shoppingitem_success';
 export const DELETE_ALLSHOPPINGITEMS_SUCCESS = 'delete_allshoppingitems_success';
 export const PAGINATE_SHOPPINGITEM = 'paginate_shoppingitem';
 export const SEARCH_SHOPPINGITEM = 'search_shoppingitem';
+export const SEARCH_SHOPPINGITEM_ERROR = 'search_shoppingitem_error';
 
 export function getAllShoppingitems(list_id){
     return({
@@ -75,17 +76,10 @@ export function deleteShoppingitem(list_id, item_id){
  }
 
 export function deleteAllShoppingitems(list_id){
-  return async (dispatch) => {
-    try {
-      const request = await instance.delete(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems`)
-
-      dispatch({
-        type: DELETE_ALLSHOPPINGITEMS_SUCCESS,
-        payload: request
-      })
-    }catch(error){
-      toastr.error(error.response.data.message);
-    }};
+  return({
+    type: DELETE_ALLSHOPPINGITEMS_SUCCESS,
+    payload: instance.delete(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems`)
+  });
  }
 
 export function paginateItems(list_id, limit, page){
@@ -105,7 +99,10 @@ export function searchShoppingitem(list_id, term){
         payload: request
       })
     }catch(error) {
-      toastr.error(error.response.data.message);
+      dispatch({
+        type: SEARCH_SHOPPINGITEM_ERROR,
+        payload: error
+      })
     }
   }
 }
