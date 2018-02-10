@@ -9,7 +9,8 @@ import {
     DELETE_SHOPPINGITEM_SUCCESS,
     DELETE_ALLSHOPPINGITEMS_SUCCESS,
     PAGINATE_SHOPPINGITEM,
-    SEARCH_SHOPPINGITEM
+    SEARCH_SHOPPINGITEM,
+    SEARCH_SHOPPINGITEM_ERROR
 } from '../../actions/ShoppingItems';
 
 describe('Shoppingitems reducer', () => {
@@ -39,7 +40,6 @@ describe('Shoppingitems reducer', () => {
                 }
             }
         }
-
         const expected = {
             "0": {},
             count:2,
@@ -48,6 +48,20 @@ describe('Shoppingitems reducer', () => {
                 "2": {item_id: 2, itemname: "item 2", quantity: 0, price: 0}
             }
            
+        };
+        const newSate = shoppingitems(initialState, action);
+        expect(newSate).toEqual(expected);
+
+    });
+    it('should get empty when passed GET_ALLSHOPPINGITEMS_SUCCESS but with no items', () => {
+        const action = {
+            type: GET_ALLSHOPPINGITEMS_SUCCESS,
+            payload: {}
+        }
+        const expected = {
+            "0": {},
+            count:0,
+            shoppingitems: {}
         };
         const newSate = shoppingitems(initialState, action);
         expect(newSate).toEqual(expected);
@@ -88,6 +102,27 @@ describe('Shoppingitems reducer', () => {
         expect(newSate).toEqual(expected);
 
     });
+    it('should update a shopping item when passed UPDATE_SHOPPINGITEM_SUCCESS', () => {
+        const action = {
+            type: UPDATE_SHOPPINGITEM_SUCCESS,
+            payload: {
+                data: {
+                    item_id: 1,
+                    itemname: "item 1",
+                    quantity: 0,
+                    price: 0
+                }
+            }
+        }
+        const expected = {
+            "0": {},
+            shoppingitem: {item_id: 1, itemname: "item 1", quantity: 0, price: 0}
+           
+        };
+        const newSate = shoppingitems(initialState, action);
+        expect(newSate).toEqual(expected);
+
+    });
     it('should delete all shopping items when DELETE_ALLSHOPPINGITEMS_SUCCESS', () => {
         const action = {
             type: DELETE_ALLSHOPPINGITEMS_SUCCESS,
@@ -122,5 +157,101 @@ describe('Shoppingitems reducer', () => {
         const newSate = shoppingitems(initialState, action);
         expect(newSate).toEqual(expected);
 
+    });
+    it('should paginate shopping items when passed PAGINATE_SHOPPINGITEM', () => {
+        const action = {
+            type: PAGINATE_SHOPPINGITEM,
+            payload: {
+                data: {
+                    count: 2,
+                    next: null,
+                    prev: null,
+                    shoppingitems: [{
+                            item_id: 1,
+                            itemname: "item 1",
+                            quantity: 0,
+                            price: 0
+                        },
+                        {
+                            item_id: 2,
+                            itemname: "item 2",
+                            quantity: 0,
+                            price: 0
+        
+                        }]
+                }
+            }
+        }
+
+        const expected = {
+            "0": {},
+            count:2,
+            shoppingitems: {
+                "1": {item_id: 1, itemname: "item 1", quantity: 0, price: 0},
+                "2": {item_id: 2, itemname: "item 2", quantity: 0, price: 0}
+            }
+           
+        };
+        const newSate = shoppingitems(initialState, action);
+        expect(newSate).toEqual(expected);
+
+    });
+    it('should search shopping items when passed SEARCH_SHOPPINGITEM', () => {
+        const action = {
+            type: SEARCH_SHOPPINGITEM,
+            payload: {
+                data: {
+                    count: 2,
+                    next: null,
+                    prev: null,
+                    shoppingitems: [{
+                            item_id: 1,
+                            itemname: "item 1",
+                            quantity: 0,
+                            price: 0
+                        },
+                        {
+                            item_id: 2,
+                            itemname: "item 2",
+                            quantity: 0,
+                            price: 0
+        
+                        }]
+                }
+            }
+        }
+
+        const expected = {
+            "0": {},
+            count:2,
+            shoppingitems: {
+                "1": {item_id: 1, itemname: "item 1", quantity: 0, price: 0},
+                "2": {item_id: 2, itemname: "item 2", quantity: 0, price: 0}
+            },
+           errorMessage: ''
+        };
+        const newSate = shoppingitems(initialState, action);
+        expect(newSate).toEqual(expected);
+    });
+
+    it('should return error with action SEARCH_SHOPPINGITEM_ERROR ', () => {
+        const action = {
+            type: SEARCH_SHOPPINGITEM_ERROR,
+            payload: {
+                response: {
+                    data: {
+                        message: "No shoppingitem to display"
+                        }
+                    }
+            }
+        }
+
+        const expected = {
+            state: {},
+            errorMessage: "No shoppingitem to display"
+            };
+
+        const newSate = shoppingitems(initialState, action);
+        expect(newSate).toEqual(expected);
     });
 });

@@ -1,3 +1,6 @@
+import { confirmAlert } from 'react-confirm-alert'; 
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -46,19 +49,32 @@ export class ItemsContainer extends Component {
     }
 
     deleteShoppingItem = (listId, itemId) => {
-        this.props.deleteShoppingitem(listId, itemId);
+        confirmAlert({
+            title: 'Confirm to submit',                       
+            message: 'Are you sure you want to DELETE?',                    
+            confirmLabel: 'Yes',                           
+            cancelLabel: 'No',                             
+            onConfirm: () => this.props.deleteShoppingitem(listId, itemId),    
+            onCancel: () => '',      
+          })
+    }
+
+    deleteShoppingItems = () => {
+        confirmAlert({
+            title: 'Confirm to DELETE',                       
+            message: 'Are you sure you want to DELETE?',                 
+            confirmLabel: 'Yes',                           
+            cancelLabel: 'No',                             
+            onConfirm: () => this.props.deleteAllShoppingitems(this.props.match.params.id),    
+            onCancel: () => '',      
+          })
     }
 
     paginateShoppingItems = (listId, limit, page) => {
         this.props.paginateItems(listId, limit, page);
     }
 
-    getListName = () => {
-        const { listname } = this.props.oneshoppinglist.data; 
-    }
-    
     render(){
-       
         const listId = this.props.match.params.id;
         return(
             <div className="ViewItems col-sm-12">
@@ -88,7 +104,7 @@ export class ItemsContainer extends Component {
                                 <button 
                                 type="button" 
                                 className="btn glyphicon glyphicon-trash text-primary" 
-                                onClick={()=>{this.props.deleteAllShoppingitems(listId)}}
+                                onClick={()=>{this.deleteShoppingItems()}}
                                 data-toggle="tooltip" 
                                 data-placement="top" 
                                 title="Delete_All_Items" 
@@ -99,7 +115,7 @@ export class ItemsContainer extends Component {
                                     listId={listId}
                                     shoppingItems={this.props.shoppingitems}
                                     onDelete={this.deleteShoppingItem}
-                                    listName={this.getListName}
+                                    searchError={this.props.searchError}
                                 />
                                 <PaginateItems
                                     listId={listId}
@@ -121,6 +137,7 @@ const mapStateToProps = (state) => {
         oneshoppinglist: state.oneshoppinglist.singleShoppingList,
         shoppingitems: state.shoppingitems.shoppingitems,
         count: state.shoppingitems.count,
+        searchError: state.shoppingitems.errorMessage
     };
 }
 const mapDispatchToProps = (dispatch) => {

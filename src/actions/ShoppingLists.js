@@ -14,6 +14,8 @@ export const DELETE_ALLSHOPPINGLISTS_SUCCESS = 'delete_allshoppinglists_success'
 export const DELETE_ONESHOPPINGLIST_SUCCESS = 'delete_oneshoppinglist_success';
 export const PAGINATE_SHOPPINGLIST = 'paginate_shoppinglist';
 export const SEARCH_SHOPPINGLIST = 'search_shoppinglist';
+export const SEARCH_SHOPPINGLIST_ERROR = 'search_shoppinglist_error';
+export const NOT_LOGGEDIN = 'not_loggedin';
 
 export function postShoppinglist(values, callback){
   return async (dispatch) => {
@@ -60,25 +62,17 @@ export function getAllShoppinglists(){
       })
     }catch(error) {
       if(error.response.data.message === 'Sorry your token expired, please log in again!'){
-        dispatch(logout())
+        dispatch({type: NOT_LOGGEDIN})
       }
     }
   }
 }
 
 export function getOneShoppinglist(id){
-  return async (dispatch) => {
-    try{
-      const request = await instance.get(`${ROOT_URL}/shoppinglists/${id}`)
-
-      dispatch({
-        type: GET_ONESHOPPINGLIST_SUCCESS,
-        payload: request
-      })
-    }catch(error) {
-      toastr.error(error.response.data.message);
-    }
-  }
+  return({
+    type: GET_ONESHOPPINGLIST_SUCCESS,
+    payload: instance.get(`${ROOT_URL}/shoppinglists/${id}`)
+  });
 }
 
 export function deleteShoppinglists(){
@@ -90,19 +84,18 @@ export function deleteShoppinglists(){
 
 export function deleteShoppinglist(list_id){
   return async (dispatch) => {
-    try{
+    try {
       const request = await instance.delete(`${ROOT_URL}/shoppinglists/${list_id}`)
 
       dispatch({
         type: DELETE_ONESHOPPINGLIST_SUCCESS,
         payload: request
       })
-      window.location.reload()
-    }catch(error) {
+      window.location.reload();
+    }catch(error){
       toastr.error(error.response.data.message);
-    }
-  }
-}
+    }};
+ }
 
 export function paginateLists(limit, page){
   return({
@@ -121,7 +114,10 @@ export function searchShoppinglist(term){
         payload: request
       })
     }catch(error) {
-      toastr.error(error.response.data.message);
+      dispatch({
+        type: SEARCH_SHOPPINGLIST_ERROR,
+        payload: error
+      })
     }
   }
 }

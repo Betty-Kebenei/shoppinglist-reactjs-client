@@ -11,6 +11,11 @@ const mockStore = configureStore(middlewares);
 import { UpdateItemContainer } from '../../components/containers/UpdateItemContainer';
 
 describe('UpdateItemContainer', () => {
+    let props = {
+        match: {params: {id: 1, itemid: 2}},
+        getOneShoppingitem: () => {},
+        updateShoppingitems: () => {}
+    }
     let store;
     beforeEach(() => {
         store = mockStore({});
@@ -19,15 +24,15 @@ describe('UpdateItemContainer', () => {
         const Wrapper = mount(
             <Provider store={store}>
                 <BrowserRouter>
-                    <UpdateItemContainer />
+                    <UpdateItemContainer {...props}/>
                 </BrowserRouter>
             </Provider>
           );
         expect(Wrapper.find('div').length).toBeGreaterThan(0);
     });
-    // it("always has UpdateItemContainer function", () => {
-    // const Wrapper = shallow(<UpdateItemContainer {...props} />)
-    // Wrapper.instance().updateItem();
-    // });
+    it("always has UpdateItemContainer function", () => {
+    const Wrapper = shallow(<UpdateItemContainer {...props} />)
+    Wrapper.instance().updateItem();
+    });
 });
 

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { Link } from 'react-router-dom';
 
 const ViewItems = (props) => {
-    const { listId, shoppingItems, onDelete } = props;
+    const { listId, shoppingItems, onDelete, searchError } = props;
 
     const renderShoppingitems = () => (
         _.map(shoppingItems, item => {
@@ -58,6 +58,7 @@ const ViewItems = (props) => {
                         {renderShoppingitems()}
                     </tbody>
                 </table>
+                {searchError}
             </div>
         </div>
     );
