@@ -97,7 +97,7 @@ export class ListsContainer extends Component {
                 })} />
                 
                 <ViewLists 
-                    shoppinglists={this.props.allshoppinglists}
+                    shoppinglists={this.props.shoppinglists}
                     onSearch={this.searchShoppingLists}
                     deleteOneShoppingList={this.deleteOneShoppingList}
                     deleteAllShoppingLists={this.deleteAllShoppingLists}
