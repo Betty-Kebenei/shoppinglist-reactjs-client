@@ -7,6 +7,7 @@ import validate from '../common/Validation';
 const LoginForm = (props) => {
     const {handleSubmit, onSubmit} = props;
 
+    //Return a login redux form.
     return(
         <div className="Login">
             <form className="LoginForm" onSubmit={handleSubmit(onSubmit)}>

@@ -8,6 +8,8 @@ import validate from '../common/Validation';
 
 export const AddListForm = (props) => {
     const { handleSubmit, onSubmit } = props;
+
+    // Returns a redux form for creating shopping lists.
     return(
         <div>
             <form className="AddListForm" onSubmit={handleSubmit(onSubmit)}>

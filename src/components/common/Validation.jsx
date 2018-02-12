@@ -34,9 +34,9 @@ const validations = {
         length({ min: 3 }),
         format({ with: /^[A-Za-z0-9]+$/i, message: 'Letters and digits only' })
     ],
-    quantity: [numericality()],
-    units: [format({ with: /^[A-Za-z]+$/i, message: 'Letters only' })],
-    price: [numericality()],
+    quantity: [numericality({allowBlank: true})],
+    units: [ format({ without: /^[0-9]+$/i, message: 'Numbers are not currency characters' })],
+    price: [ numericality({allowBlank: true})],
     currency: [format({ without: /^[0-9]+$/i, message: 'Numbers are not currency characters' })]
 }
 

@@ -27,7 +27,7 @@ describe('Login reducer', () => {
             type: NOT_LOGGEDIN,
         }
         const expected = {
-            "0": {},
+            state: undefined,
             authenticated: false
         };
 

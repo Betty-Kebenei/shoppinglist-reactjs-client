@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const ViewItems = (props) => {
     const { listId, shoppingItems, onDelete, searchError } = props;
 
+    // Display shopping items in a table.
     const renderShoppingitems = () => (
         _.map(shoppingItems, item => {
             return (

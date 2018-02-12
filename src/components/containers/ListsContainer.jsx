@@ -33,10 +33,12 @@ export class ListsContainer extends Component {
         }
     }
     
+    // Display all shopping lists for a user when this component is rendered.
     componentDidMount(){
         this.props.getAllShoppinglists();
     }
 
+    // Create a shopping list.
     addShoppingList = (values) => {
         this.props.postShoppinglist(values, () => {
             toastr.success('Shopping list successfully created!');
@@ -44,21 +46,12 @@ export class ListsContainer extends Component {
         
     }
 
-    updateShoppinglist = (values) => {
-        const { list_id } = this.props.singleShoppingList.data;
-        this.props.updateShoppinglist(list_id, values, () => {
-            toastr.success('Shopping list successfully updated!');
-        });
-    }
-
-    searchShoppingLists = () => {
-        this.props.searchShoppinglist(this.state.term);
-    }
-
+    // Paginate shopping lists.
     paginateShoppingLists = (limit, page) => {
         this.props.paginateLists(limit, page);
     }
 
+    // Delete a single shopping list.
     deleteOneShoppingList = (listId) => {
         confirmAlert({
             title: 'Confirm to DELETE',                       
@@ -70,6 +63,7 @@ export class ListsContainer extends Component {
         });
     }
 
+    // Delete all shopping lists for a user.
     deleteAllShoppingLists = () => {
         confirmAlert({
             title: 'Confirm to DELETE',                       
@@ -81,8 +75,7 @@ export class ListsContainer extends Component {
         });
     }
 
-    render(){
-        
+    render(){  
         return(
             <div className="Shoppinglist col-sm-12">
 
@@ -97,8 +90,7 @@ export class ListsContainer extends Component {
                 })} />
                 
                 <ViewLists 
-                    shoppinglists={this.props.allshoppinglists}
-                    onSearch={this.searchShoppingLists}
+                    shoppinglists={this.props.shoppinglists}
                     deleteOneShoppingList={this.deleteOneShoppingList}
                     deleteAllShoppingLists={this.deleteAllShoppingLists}
                     searchError={this.props.errorMessage}

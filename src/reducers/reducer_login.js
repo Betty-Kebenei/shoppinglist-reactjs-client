@@ -6,7 +6,7 @@ export default (state={}, action) => {
     case LOGIN_SUCCESS:
       return { ...state, authenticated: true };
     case NOT_LOGGEDIN:
-      return { ...state, authenticated: false };
+      return { state: undefined, authenticated: false };
     default:
       return state;
   } 

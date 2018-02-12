@@ -15,6 +15,7 @@ const ViewShoppingLists = (props) => {
         searchError
      } = props;
 
+      // Display shopping lists in a table.
     const renderShoppinglists = () =>  (
         _.map(shoppinglists, shoppinglist => {
             const list_id = shoppinglist.list_id;
