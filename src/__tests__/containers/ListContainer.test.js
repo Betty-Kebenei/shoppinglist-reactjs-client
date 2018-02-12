@@ -15,7 +15,6 @@ describe('ListContainer', () => {
       getAllShoppinglists: () => {},
       addShoppingList: () => {},
       postShoppinglist: () => {},
-      searchShoppinglist: () => {},
       paginateLists: () => {},
       deleteShoppinglist: () => {},
       deleteShoppinglists: () => {}
@@ -36,7 +35,6 @@ describe('ListContainer', () => {
       it("always has functions", () => {
         const Wrapper = shallow(<ListsContainer {...props} />)
         Wrapper.instance().addShoppingList();
-        Wrapper.instance().searchShoppingLists();
         Wrapper.instance().paginateShoppingLists();
         Wrapper.instance().deleteOneShoppingList();
         Wrapper.instance().deleteAllShoppingLists();

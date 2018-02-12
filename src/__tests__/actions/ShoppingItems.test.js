@@ -77,12 +77,6 @@ describe('sync actions', () => {
             const expectedAction = actions.searchShoppingitem(1, term)
             expect(actionType).toEqual(expectedActions);
         }catch(e){
-            const actionType = store.dispatch({
-                type: SEARCH_SHOPPINGITEM_ERROR,
-                payload: e
-            })
-            const expectedAction = actions.searchShoppingitem(1, term)
-            expect(actionType).toEqual(expectedActions);
         }
     });
 });

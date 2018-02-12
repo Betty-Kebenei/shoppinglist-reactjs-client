@@ -5,7 +5,7 @@ export const NOT_LOGGEDIN = 'not_loggedin';
 export const LOGIN_SUCCESS = 'login_success';
 export const LOGOUT_ERROR = 'logout_error';
 
-const ROOT_URL = 'http://localhost:5000';
+const ROOT_URL = 'https://flaskapiv1.herokuapp.com';
 
 export const loginUser = (values, callback) => {
     return async (dispatch) => {
