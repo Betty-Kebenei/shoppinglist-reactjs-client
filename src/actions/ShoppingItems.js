@@ -31,6 +31,7 @@ export const getOneShoppingitem = (list_id, item_id) => {
 export const postShoppingitems = (list_id, values) => {
   return async (dispatch) => {
     try {
+      console.log(values);
       const request = await instance.post(`${ROOT_URL}/shoppinglists/${list_id}/shoppingitems`, values);
 
       dispatch({
@@ -39,7 +40,8 @@ export const postShoppingitems = (list_id, values) => {
       })
       window.location.reload();
     } catch(error) {
-      toastr.error(error.response.data.message); 
+      console.log(error)
+      // toastr.error(error.response.data.message); 
     }
   };
 }
