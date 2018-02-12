@@ -11,6 +11,7 @@ import LoginForm  from '../authentication/LoginForm';
 
 export class LoginFormContainer extends Component {
     
+    // Login a registered user.
     handleLogin = (values) => {
         this.props.loginUser(values, () => {
             this.props.history.push('/');

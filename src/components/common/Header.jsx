@@ -7,6 +7,7 @@ import { getAllShoppinglists } from '../../actions/ShoppingLists';
 
 export class Header extends Component {
 
+    // A component that is always rendered.
     componentWillMount(){
         this.props.getAllShoppinglists();
     }

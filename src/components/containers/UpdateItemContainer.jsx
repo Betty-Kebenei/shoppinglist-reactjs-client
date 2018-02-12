@@ -11,12 +11,14 @@ import { updateShoppingitems, getOneShoppingitem } from '../../actions/ShoppingI
 
 export class UpdateItemContainer extends Component {
 
+    // Get a single shoppping item to be updated in a shopping list.
     componentDidMount(){
         const { id } = this.props.match.params;
         const { itemid } = this.props.match.params;
         this.props.getOneShoppingitem(id, itemid);
     }
 
+    // Updated the shopping item.
     updateItem = (values) => {
         const { id } = this.props.match.params;
         const { itemid } = this.props.match.params;

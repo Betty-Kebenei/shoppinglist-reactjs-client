@@ -6,6 +6,8 @@ import validate from '../common/Validation';
 
 const RegistrationForm = (props) => {
     const { handleSubmit, onSubmit } = props;
+
+    //Returns a registration redux form.   
     return(
         <div>
             <form className="RegistrationForm" onSubmit={handleSubmit(onSubmit)}>

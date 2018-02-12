@@ -11,7 +11,7 @@ const PaginateItems = (props) => {
 
     
 
-    //Formulating numbers for pages of shopping lists
+    // Formulating numbers for pages of shopping items.
     let itemPages = [];
     let numOfPages = Math.floor(countItems/limitItems);
     if((countItems % limitItems) > 0 ){
@@ -28,7 +28,7 @@ const PaginateItems = (props) => {
         );
     }   
 
-    //Displaying pages
+    // Displaying pages
     return(
         <div>
             <ul className="pagination pagination-lg pagination-centered">{itemPages}</ul>

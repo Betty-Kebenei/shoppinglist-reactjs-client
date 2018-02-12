@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 
 export default (ComposedComponent) => {
   class Auth extends Component {
+
+    // This component protects the routes that one can't
+    // access before logging in.  
     componentWillMount() {
       if (!this.props.authenticated) {
         this.props.history.push('/auth/login');

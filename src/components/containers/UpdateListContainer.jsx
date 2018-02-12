@@ -9,11 +9,14 @@ import UpdateListForm from '../shoppinglist/UpdateListForm';
 
 export class UpdateListContainer extends Component{
 
+
+    // Get a shopping list to be updated.
     componentDidMount(){
         const { id } = this.props.match.params;
         this.props.getOneShoppinglist(id);
     }
 
+    // Uopdate the shopping list.
     updateList = (values) => {
         const listId = this.props.match.params.id;
         this.props.updateShoppinglist(listId, values, () => {

@@ -8,6 +8,8 @@ import validate from '../common/Validation';
 
 const AddItemForm = (props) => {
     const { handleSubmit, onSubmit, listId } = props;
+
+        // Returns a redux form for creating shopping items.
         return(
             <div className="row">
                 <div className="ListName col-sm-6">

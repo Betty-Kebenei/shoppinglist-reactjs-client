@@ -11,6 +11,7 @@ import  RegistrationForm from '../authentication/RegistrationForm';
 
 export class RegistrationFormContainer extends Component {
 
+    // Register a new user.
     handleRegistration = (values) => {
         this.props.createUser(values, () => {
             this.props.history.push('/auth/login');

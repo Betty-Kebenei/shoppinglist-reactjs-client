@@ -8,8 +8,9 @@ import RenderField from '../common/RenderField';
 import validate from '../common/Validation';
 
 const UpdateItemForm = (props) => {
-        const { handleSubmit, onSubmit, listId, initialValues } = props;
-
+    const { handleSubmit, onSubmit, listId, initialValues } = props;
+    
+    // Returns a redux form for updating shopping items.
     return(
         <div>
             <form className="ShoppingitemForm col-sm-12" onSubmit={handleSubmit(onSubmit)}>

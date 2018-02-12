@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 
 export default (ComposedComponent) => {
   class NotAuth extends Component {
+
+    // A component that always redirects the user to the 
+    // dashboard as long as the user is logged in.
+    // With this, a user can never access the login or
+    // registration page while still logged in.   
     componentWillMount() {
       if (this.props.authenticated) {
         this.props.history.push('/');

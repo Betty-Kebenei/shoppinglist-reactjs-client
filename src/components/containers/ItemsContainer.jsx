@@ -33,6 +33,7 @@ export class ItemsContainer extends Component {
         } 
     }
 
+    // Displays shoppping items when this component is rendered.
     componentDidMount(){
         const listId = this.props.match.params.id;
         if(this.props.shoppingitems){
@@ -41,6 +42,7 @@ export class ItemsContainer extends Component {
         this.props.getOneShoppinglist(listId);
     }
 
+    // Create a shopping item in a shopping list.
     addShoppingItem = (values) => {      
         const listId = this.props.match.params.id;
         this.props.postShoppingitems(listId, values, () => {
@@ -48,6 +50,7 @@ export class ItemsContainer extends Component {
         });
     }
 
+    // Delete a shopping item from a shopping list.
     deleteShoppingItem = (listId, itemId) => {
         confirmAlert({
             title: 'Confirm to submit',                       
@@ -59,6 +62,7 @@ export class ItemsContainer extends Component {
           })
     }
 
+    // Delete all shopping items from a shopping list.
     deleteShoppingItems = () => {
         confirmAlert({
             title: 'Confirm to DELETE',                       
@@ -70,6 +74,7 @@ export class ItemsContainer extends Component {
           })
     }
 
+    // Paginate shopping items in a shopping list.
     paginateShoppingItems = (listId, limit, page) => {
         this.props.paginateItems(listId, limit, page);
     }

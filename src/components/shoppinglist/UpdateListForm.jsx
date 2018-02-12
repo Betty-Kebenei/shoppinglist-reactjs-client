@@ -9,6 +9,8 @@ import validate from '../common/Validation';
 
 export const UpdateListForm = (props) => {
     const { handleSubmit, onSubmit, initialValues } = props;
+
+    // Returns a redux form for updating shopping lists.
     return(
         <div>
             <form className="UpdateListForm col-sm-12" onSubmit={handleSubmit(onSubmit)}>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-
+// Reusable code form redux forms.
 const RenderField = (field) => {
     const {meta: {touched, error}} = field;
     const className = `form-group ${ touched && error ? 'has-danger' : ''}`;
