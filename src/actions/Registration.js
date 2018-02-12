@@ -4,7 +4,7 @@ import toastr from 'toastr';
 
 export const REGISTER_USER = 'register_user';
 
-const ROOT_URL = 'https://flaskapiv1.herokuapp.com/';
+const ROOT_URL = 'https://flaskapiv1.herokuapp.com';
 
 export const createUser = (values, callback) => {
     return async (dispatch) => {

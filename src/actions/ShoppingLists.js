@@ -2,7 +2,7 @@ import instance from './AxiosInstance';
 
 import toastr from 'toastr';
 
-const ROOT_URL = 'https://flaskapiv1.herokuapp.com/';
+const ROOT_URL = 'https://flaskapiv1.herokuapp.com';
 
 export const POST_SHOPPINGLIST_SUCCESS = 'post_shoppinglist_success';
 export const GET_ALLSHOPPINGLISTS_SUCCESS = 'get_allshoppinglists_success';
