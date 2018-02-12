@@ -2,9 +2,7 @@ import instance from './AxiosInstance';
 
 import toastr from 'toastr';
 
-import  {logout}  from './Login';
-
-const ROOT_URL = 'http://localhost:5000';
+const ROOT_URL = 'https://flaskapiv1.herokuapp.com/';
 
 export const POST_SHOPPINGLIST_SUCCESS = 'post_shoppinglist_success';
 export const GET_ALLSHOPPINGLISTS_SUCCESS = 'get_allshoppinglists_success';
@@ -69,9 +67,10 @@ export const getAllShoppinglists = () => {
 }
 
 export const getOneShoppinglist = (id) => {
+  const request = instance.get(`${ROOT_URL}/shoppinglists/${id}`)
   return({
     type: GET_ONESHOPPINGLIST_SUCCESS,
-    payload: instance.get(`${ROOT_URL}/shoppinglists/${id}`)
+    payload: request
   });
 }
 
