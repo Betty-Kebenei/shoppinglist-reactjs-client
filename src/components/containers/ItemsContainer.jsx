@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 import toastr from 'toastr';
 
-import { bindActionCreators } from 'redux';
 
 import ViewItems from '../shoppingitems/ViewItems';
 import AddItemForm from '../shoppingitems/AddItemForm';
@@ -16,6 +15,7 @@ import PaginateItems from '../shoppingitems/PaginateItems';
 import { getOneShoppinglist } from '../../actions/ShoppingLists'
 import { 
     postShoppingitems,
+    getOneShoppingitem,
     getAllShoppingitems,
     deleteAllShoppingitems,
     deleteShoppingitem,
@@ -50,6 +50,11 @@ export class ItemsContainer extends Component {
         });
     }
 
+    updateShoppingItem = (id, itemId) => {
+        this.props.getOneShoppingitem(id, itemId).then(
+            () => this.props.history.push(`/${id}/shoppingitems/${itemId}`))
+    }
+
     // Delete a shopping item from a shopping list.
     deleteShoppingItem = (listId, itemId) => {
         confirmAlert({
@@ -80,6 +85,7 @@ export class ItemsContainer extends Component {
     }
 
     render(){
+        const listName = this.props.match.params.listname;
         const listId = this.props.match.params.id;
         return(
             <div className="ViewItems col-sm-12">
@@ -92,7 +98,7 @@ export class ItemsContainer extends Component {
                             <div className="col-sm-12">
                                 <AddItemForm 
                                     onSubmit={this.addShoppingItem}
-                                    listId={listId}
+                                    listName={listName}
                                 />
                             </div>
                             <br /><br />
@@ -121,6 +127,7 @@ export class ItemsContainer extends Component {
                                     shoppingItems={this.props.shoppingitems}
                                     onDelete={this.deleteShoppingItem}
                                     searchError={this.props.errorMessage}
+                                    updateItem={this.updateShoppingItem}
                                 />
                                 <PaginateItems
                                     listId={listId}
@@ -152,6 +159,7 @@ export default connect(
     mapStateToProps, {
         postShoppingitems,
         getOneShoppinglist,
+        getOneShoppingitem,
         getAllShoppingitems,
         deleteAllShoppingitems,
         deleteShoppingitem,

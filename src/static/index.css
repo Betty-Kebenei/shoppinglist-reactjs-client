@@ -8,7 +8,7 @@
 }
 
 
-#container {
+.container {
   background: url('img_5928.png');
   margin: auto;
   min-height: 750px;
@@ -115,3 +115,7 @@
   border-radius: 5px;
 }
 
+.NotFound {
+  background-color:#F5F5F5;
+  padding: 30px;
+}
