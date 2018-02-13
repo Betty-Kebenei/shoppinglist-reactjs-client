@@ -46,7 +46,7 @@ const App = (props) => (
                         <Route exact path='/auth/login' component={noAuthRequired(LoginFormContainer)} />
                         <Route exact path='/auth/logout' component={authRequired(Logout)} />
                         <Route exact path='/:id/shoppingitems/:itemid' component={authRequired(UpdateItemContainer)}/>
-                        <Route exact path='/:id/shoppingitems' component={authRequired(ItemsContainer)} />
+                        <Route exact path='/:id/:listname/shoppingitems' component={authRequired(ItemsContainer)} />
                         <Route exact path='/:id' component={authRequired(UpdateListContainer)} />
                         <Route exact path='/' component={authRequired(ListsContainer) } />
                         <Route path= "*" component={NotFound} />
