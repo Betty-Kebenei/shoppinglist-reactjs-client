@@ -8,7 +8,7 @@ This is a ReactJs client to consume the FlaskAPI for the shopping list applicati
 * Hosted API: https://flaskapiv1.herokuapp.com/
 * Swagger documentation: https://app.swaggerhub.com/apis/Andela42/FlaskAPI/1.0.0#/
 
-# Features:
+### Features:
 * User can register and login
 * User can add, update, get and delete a shopping list.
 * User can add, update, get and delete items in a shopping list.
