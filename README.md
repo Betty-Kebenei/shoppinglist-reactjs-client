@@ -5,8 +5,8 @@
 ## Shoppinglist-reactjs-client
 This is a ReactJs client to consume the FlaskAPI for the shopping list application: 
 
-Hosted API: https://flaskapiv1.herokuapp.com/
-Swagger documentation: https://app.swaggerhub.com/apis/Andela42/FlaskAPI/1.0.0#/
+* Hosted API: https://flaskapiv1.herokuapp.com/
+* Swagger documentation: https://app.swaggerhub.com/apis/Andela42/FlaskAPI/1.0.0#/
 
 # Features:
 * User can register and login
@@ -22,13 +22,13 @@ Swagger documentation: https://app.swaggerhub.com/apis/Andela42/FlaskAPI/1.0.0#/
 These are instructions on how to set up the application on a local development machine.
 
 Clone the repository
-| git clone https://github.com/Betty-Kebenei/shoppinglist-reactjs-client.git
+> git clone https://github.com/Betty-Kebenei/shoppinglist-reactjs-client.git
 
 Install the dependencies
-| npm install
+> npm install
 
 Run the application locally
-| npm start
+> npm start
 
 ## Live app:
 https://reactshoppinglistapp.herokuapp.com/
