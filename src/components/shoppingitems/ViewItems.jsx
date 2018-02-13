@@ -1,9 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
-import { Link } from 'react-router-dom';
 
 const ViewItems = (props) => {
-    const { listId, shoppingItems, onDelete, searchError } = props;
+    const { listId, shoppingItems, onDelete, searchError, updateItem } = props;
 
     // Display shopping items in a table.
     const renderShoppingitems = () => (
@@ -17,12 +16,13 @@ const ViewItems = (props) => {
                     <td>{item.currency}</td>
                     <td>
 
-                    <Link 
-                        className="btn glyphicon glyphicon-edit text-primary" 
+                    <button 
+                        type="button" 
+                        className="btn glyphicon glyphicon-edit text-primary"
+                        onClick={()=>{updateItem(listId, item.item_id)}} 
                         data-toggle="tooltip" 
                         data-placement="top" 
                         title="Update_item" 
-                        to={`/${listId}/shoppingitems/${item.item_id}`}
                         /> 
 
                     <button 

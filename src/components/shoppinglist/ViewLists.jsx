@@ -7,11 +7,10 @@ import _ from 'lodash';
 
 const ViewShoppingLists = (props) => {
     const { 
-        oneshoppinglist,
         shoppinglists,
         deleteOneShoppingList,
         deleteAllShoppingLists,
-        onSearch,
+        updateOneShoppinglist,
         searchError
      } = props;
 
@@ -29,16 +28,17 @@ const ViewShoppingLists = (props) => {
                             data-toggle="tooltip" 
                             data-placement="top" 
                             title="View Items"  
-                            to={`/${list_id}/shoppingitems`}
+                            to={`/${list_id}/${shoppinglist.listname}/shoppingitems`}
                         />
 
-                        <Link 
-                            className="btn glyphicon glyphicon-edit text-primary" 
+                        <button 
+                            type="button" 
+                            className="btn glyphicon glyphicon-edit text-primary"
+                            onClick={()=>{updateOneShoppinglist(shoppinglist.list_id)}} 
                             data-toggle="tooltip" 
                             data-placement="top" 
-                            title="Update_List"  
-                            to={`/${list_id}`}
-                        />
+                            title="Update_List" 
+                            />  
                         
                         <button 
                             type="button" 
