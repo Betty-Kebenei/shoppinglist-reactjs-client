@@ -1,5 +1,5 @@
-import React from 'react';
-import { required, numericality, format, length, email, confirmation, inclusion } from 'redux-form-validators';
+
+import { required, numericality, format, length, email, confirmation } from 'redux-form-validators';
 
 const validations = {
     //validating registration form
@@ -34,9 +34,9 @@ const validations = {
         length({ min: 3 }),
         format({ with: /^[A-Za-z0-9]+$/i, message: 'Letters and digits only' })
     ],
-    quantity: [numericality({allowBlank: true})],
-    units: [ format({ without: /^[0-9]+$/i, message: 'Numbers are not currency characters' })],
-    price: [ numericality({allowBlank: true})],
+    quantity: [numericality({allowBlank: true, '>': 0})],
+    units: [ format({ without: /^[0-9]+$/i, message: 'Numbers not allowed' })],
+    price: [ numericality({allowBlank: true, '>': 0})],
     currency: [format({ without: /^[0-9]+$/i, message: 'Numbers are not currency characters' })]
 }
 

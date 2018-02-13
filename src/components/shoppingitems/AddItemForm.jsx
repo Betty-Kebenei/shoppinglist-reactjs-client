@@ -1,4 +1,5 @@
 import '../../static/index.css';
+import changeCase from '../../../node_modules/change-case';
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
@@ -7,14 +8,14 @@ import RenderField from '../common/RenderField';
 import validate from '../common/Validation';
 
 const AddItemForm = (props) => {
-    const { handleSubmit, onSubmit, listId } = props;
+    const { handleSubmit, onSubmit, listName } = props;
 
         // Returns a redux form for creating shopping items.
         return(
             <div className="row">
                 <div className="ListName col-sm-6">
-                    <h2>Items for shopping list with ID:</h2>
-                    <h2>{listId}</h2>
+                    <h2>Items for shopping list with listname:</h2>
+                    <h2>{changeCase.upperCase(listName)}</h2>
                 </div>
                 <div className="col-sm-6">
                     <form className="AddItemForm col-sm-12" onSubmit={handleSubmit(onSubmit)}>
