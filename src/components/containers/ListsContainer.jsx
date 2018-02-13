@@ -5,8 +5,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import toastr from 'toastr';
 
-import { bindActionCreators } from 'redux';
-
 import AddListForm from '../shoppinglist/AddListForm';
 import ViewLists from '../shoppinglist/ViewLists';
 import PaginateLists from '../shoppinglist/PaginateLists';
@@ -36,6 +34,10 @@ export class ListsContainer extends Component {
     // Display all shopping lists for a user when this component is rendered.
     componentDidMount(){
         this.props.getAllShoppinglists();
+    }
+
+    updateOneShoppinglist = id => {
+        this.props.getOneShoppinglist(id).then(() => this.props.history.push(`/${id}`))
     }
 
     // Create a shopping list.
@@ -94,6 +96,7 @@ export class ListsContainer extends Component {
                     deleteOneShoppingList={this.deleteOneShoppingList}
                     deleteAllShoppingLists={this.deleteAllShoppingLists}
                     searchError={this.props.errorMessage}
+                    updateOneShoppinglist={this.updateOneShoppinglist}
                 />
 
                 <PaginateLists
@@ -128,5 +131,5 @@ export default connect(
         deleteShoppinglist, 
         deleteShoppinglists,
         paginateLists,
-        searchShoppinglist
+        searchShoppinglist,
     })(ListsContainer);
