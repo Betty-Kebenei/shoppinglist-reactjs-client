@@ -6,7 +6,7 @@ import oneshoppinglist from './reducer_activeShoppinglist';
 import shoppingitems from './reducer_shoppingitems';
 import form from './FormsReducer';
 
-import { NOT_LOGGEDIN } from '../actions/Login';
+import * as types from '../actions/ActionTypes';
 
 const appReducer = combineReducers ({
     form,
@@ -18,7 +18,7 @@ const appReducer = combineReducers ({
 });
 
 const rootReducer = (state, action) => {
-    if(action.type === NOT_LOGGEDIN ){
+    if(action.type === types.NOT_LOGGEDIN ){
         state = undefined
     }
     return appReducer(state, action);

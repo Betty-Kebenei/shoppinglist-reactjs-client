@@ -2,17 +2,14 @@ import expect from 'expect';
 import activeShoppinglist from '../../reducers/reducer_activeShoppinglist';
 import shoppinglists from '../../reducers/reducer_shoppinglist';
 
-import { 
-    GET_ONESHOPPINGLIST_SUCCESS,
-    UPDATE_SHOPPINGLIST_SUCCESS
-} from '../../actions/ShoppingLists';
+import * as types from "../../actions/ActionTypes";
 
 describe('Active shoppinglist reducer', () => {
     it('should get one shopping list when passed GET_ONESHOPPINGLIST_SUCCESS', () => {
         const initialState = [{}];
 
         const action = {
-            type: GET_ONESHOPPINGLIST_SUCCESS,
+            type: types.GET_ONESHOPPINGLIST_SUCCESS,
             payload: {
                 data: [{
                     list_id: 1,
@@ -37,7 +34,7 @@ describe('Active shoppinglist reducer', () => {
         const initialState = [{}];
 
         const action = {
-            type: UPDATE_SHOPPINGLIST_SUCCESS,
+            type: types.UPDATE_SHOPPINGLIST_SUCCESS,
             payload: {
                 data: [{
                     list_id: 1,

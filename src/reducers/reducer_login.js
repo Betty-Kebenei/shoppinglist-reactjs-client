@@ -1,11 +1,10 @@
-
-import { LOGIN_SUCCESS, NOT_LOGGEDIN } from '../actions/Login';
+import * as types from '../actions/ActionTypes';
 
 export default (state={}, action) => {
   switch(action.type) {
-    case LOGIN_SUCCESS:
+    case types.LOGIN_SUCCESS:
       return { ...state, authenticated: true };
-    case NOT_LOGGEDIN:
+    case types.NOT_LOGGEDIN:
       return { state: undefined, authenticated: false };
     default:
       return state;

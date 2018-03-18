@@ -1,9 +1,6 @@
 import axios from 'axios';
 import toastr from 'toastr';
-
-export const NOT_LOGGEDIN = 'not_loggedin';
-export const LOGIN_SUCCESS = 'login_success';
-export const LOGOUT_ERROR = 'logout_error';
+import * as types from './ActionTypes';
 
 const ROOT_URL = 'https://flaskapiv1.herokuapp.com';
 
@@ -12,7 +9,7 @@ export const loginUser = (values, callback) => {
         try {
             const request = await axios.post(`${ROOT_URL}/auth/login`, values);
 
-            dispatch({type: LOGIN_SUCCESS});
+            dispatch({type: types.LOGIN_SUCCESS});
             localStorage.setItem('access_token', request.data.access_token)
             callback()
         }catch(error){ 
@@ -24,7 +21,7 @@ export const loginUser = (values, callback) => {
 export const logoutUser = () => {
     localStorage.clear();
     return({
-        type: NOT_LOGGEDIN
+        type: types.NOT_LOGGEDIN
     });
 }
 

@@ -13,7 +13,7 @@ import reduxThunk from 'redux-thunk';
 
 import rootReducer from '../reducers';
 
-import { LOGIN_SUCCESS } from '../actions/Login';
+import * as types from '../actions/ActionTypes';
 
 import Header from './common/Header';
 import RegistrationFormContainer from './containers/RegistrationFormContainer';
@@ -32,7 +32,7 @@ const store = createStoreWithMiddleware(rootReducer);
 const token = localStorage.getItem('access_token');
 
 if(token) {
-    store.dispatch({ type: LOGIN_SUCCESS});
+    store.dispatch({ type: types.LOGIN_SUCCESS});
   }
 
 const App = (props) => (

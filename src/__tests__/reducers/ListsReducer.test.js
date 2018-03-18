@@ -1,14 +1,7 @@
 import expect from 'expect';
 import shoppinglists from '../../reducers/reducer_shoppinglist';
 
-import { 
-    GET_ALLSHOPPINGLISTS_SUCCESS,
-    DELETE_ALLSHOPPINGLISTS_SUCCESS,
-    DELETE_ONESHOPPINGLIST_SUCCESS,
-    PAGINATE_SHOPPINGLIST,
-    SEARCH_SHOPPINGLIST,
-    SEARCH_SHOPPINGLIST_ERROR
- } from '../../actions/ShoppingLists';
+import * as types from "../../actions/ActionTypes";
 
  describe('Shoppinglists reducer', () => {
     const initialState = [{
@@ -19,7 +12,7 @@ import {
 
     it('should get all shopping lists when passed GET_ALLSHOPPINGLISTS_SUCCESS', () => {
         const action = {
-            type: GET_ALLSHOPPINGLISTS_SUCCESS,
+            type: types.GET_ALLSHOPPINGLISTS_SUCCESS,
             payload: {
                 data: {
                     count: 2,
@@ -53,7 +46,7 @@ import {
     });
     it('should delete shopping lists when DELETE_ALLSHOPPINGLISTS_SUCCESS', () => {
         const action = {
-            type: DELETE_ALLSHOPPINGLISTS_SUCCESS,
+            type: types.DELETE_ALLSHOPPINGLISTS_SUCCESS,
             payload: {
                 data: {
                     message: "All shopping lists successfully deleted"
@@ -71,7 +64,7 @@ import {
 
     it('should delete one shopping list when DELETE_ONESHOPPINGLIST_SUCCESS', () => {
         const action = {
-            type: DELETE_ONESHOPPINGLIST_SUCCESS,
+            type: types.DELETE_ONESHOPPINGLIST_SUCCESS,
             payload: {
                 data: {
                     message: "Shoppinglist with id 70 successfully deleted"
@@ -98,7 +91,7 @@ import {
     });
     it('should paginate lists with action PAGINATE_SHOPPINGLIST ', () => {
         const action = {
-            type: PAGINATE_SHOPPINGLIST,
+            type: types.PAGINATE_SHOPPINGLIST,
             payload: {
                 data: {
                     count: 2,
@@ -130,7 +123,7 @@ import {
     });
     it('should search lists with action SEARCH_SHOPPINGLIST ', () => {
         const action = {
-            type: SEARCH_SHOPPINGLIST,
+            type: types.SEARCH_SHOPPINGLIST,
             payload: {
                 data: {
                     count: 2,
@@ -163,7 +156,7 @@ import {
     });
     it('should return error with action SEARCH_SHOPPINGLIST_ERROR ', () => {
         const action = {
-            type: SEARCH_SHOPPINGLIST_ERROR,
+            type: types.SEARCH_SHOPPINGLIST_ERROR,
             payload: {
                 response: {
                     data: {

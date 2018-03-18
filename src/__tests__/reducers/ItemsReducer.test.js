@@ -1,24 +1,14 @@
 import expect from 'expect';
 import shoppingitems from '../../reducers/reducer_shoppingitems';
 
-import { 
-    GET_ALLSHOPPINGITEMS_SUCCESS,
-    GET_ONESHOPPINGITEM_SUCCESS,
-    POST_SHOPPINGITEM_SUCCESS,
-    UPDATE_SHOPPINGITEM_SUCCESS,
-    DELETE_SHOPPINGITEM_SUCCESS,
-    DELETE_ALLSHOPPINGITEMS_SUCCESS,
-    PAGINATE_SHOPPINGITEM,
-    SEARCH_SHOPPINGITEM,
-    SEARCH_SHOPPINGITEM_ERROR
-} from '../../actions/ShoppingItems';
+import * as types from "../../actions/ActionTypes";
 
 describe('Shoppingitems reducer', () => {
     const initialState = [{}];
 
     it('should get all shopping items when passed GET_ALLSHOPPINGITEMS_SUCCESS', () => {
         const action = {
-            type: GET_ALLSHOPPINGITEMS_SUCCESS,
+            type: types.GET_ALLSHOPPINGITEMS_SUCCESS,
             payload: {
                 data: {
                     count: 2,
@@ -55,7 +45,7 @@ describe('Shoppingitems reducer', () => {
     });
     it('should get empty when passed GET_ALLSHOPPINGITEMS_SUCCESS but with no items', () => {
         const action = {
-            type: GET_ALLSHOPPINGITEMS_SUCCESS,
+            type: types.GET_ALLSHOPPINGITEMS_SUCCESS,
             payload: {}
         }
         const expected = {
@@ -69,7 +59,7 @@ describe('Shoppingitems reducer', () => {
     });
     it('should get one shopping item when passed GET_ALLSHOPPINGITEMS_SUCCESS', () => {
         const action = {
-            type: GET_ONESHOPPINGITEM_SUCCESS,
+            type: types.GET_ONESHOPPINGITEM_SUCCESS,
             payload: {
                 data: {
                     item_id: 1,
@@ -90,7 +80,7 @@ describe('Shoppingitems reducer', () => {
     });
     it('should post a shopping item when passed POST_SHOPPINGITEM_SUCCESS', () => {
         const action = {
-            type: POST_SHOPPINGITEM_SUCCESS,
+            type: types.POST_SHOPPINGITEM_SUCCESS,
             payload: {
                 message: "shoppingitem with itemname melon successfully created."
             }
@@ -104,7 +94,7 @@ describe('Shoppingitems reducer', () => {
     });
     it('should update a shopping item when passed UPDATE_SHOPPINGITEM_SUCCESS', () => {
         const action = {
-            type: UPDATE_SHOPPINGITEM_SUCCESS,
+            type: types.UPDATE_SHOPPINGITEM_SUCCESS,
             payload: {
                 data: {
                     item_id: 1,
@@ -125,7 +115,7 @@ describe('Shoppingitems reducer', () => {
     });
     it('should delete all shopping items when DELETE_ALLSHOPPINGITEMS_SUCCESS', () => {
         const action = {
-            type: DELETE_ALLSHOPPINGITEMS_SUCCESS,
+            type: types.DELETE_ALLSHOPPINGITEMS_SUCCESS,
             payload: {
                 data: {
                     message: "All shopping items successfully deleted!"
@@ -142,7 +132,7 @@ describe('Shoppingitems reducer', () => {
     });
     it('should delete one shopping item when DELETE_SHOPPINGITEM_SUCCESS', () => {
         const action = {
-            type: DELETE_SHOPPINGITEM_SUCCESS,
+            type: types.DELETE_SHOPPINGITEM_SUCCESS,
             payload: {
                 data: {
                     message: "shoppingitem with id 1 successfully deleted"
@@ -160,7 +150,7 @@ describe('Shoppingitems reducer', () => {
     });
     it('should paginate shopping items when passed PAGINATE_SHOPPINGITEM', () => {
         const action = {
-            type: PAGINATE_SHOPPINGITEM,
+            type: types.PAGINATE_SHOPPINGITEM,
             payload: {
                 data: {
                     count: 2,
@@ -198,7 +188,7 @@ describe('Shoppingitems reducer', () => {
     });
     it('should search shopping items when passed SEARCH_SHOPPINGITEM', () => {
         const action = {
-            type: SEARCH_SHOPPINGITEM,
+            type: types.SEARCH_SHOPPINGITEM,
             payload: {
                 data: {
                     count: 2,
@@ -236,7 +226,7 @@ describe('Shoppingitems reducer', () => {
 
     it('should return error with action SEARCH_SHOPPINGITEM_ERROR ', () => {
         const action = {
-            type: SEARCH_SHOPPINGITEM_ERROR,
+            type: types.SEARCH_SHOPPINGITEM_ERROR,
             payload: {
                 response: {
                     data: {

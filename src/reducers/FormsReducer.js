@@ -1,11 +1,10 @@
 import { reducer as formReducer } from 'redux-form';
-import { POST_SHOPPINGLIST_SUCCESS } from '../actions/ShoppingLists';
-import { POST_SHOPPINGITEM_SUCCESS } from '../actions/ShoppingItems';
+import * as types from '../actions/ActionTypes';
 
 export default formReducer.plugin({
     AddListForm: (state, action) => {
         switch(action.type){
-            case POST_SHOPPINGLIST_SUCCESS:
+            case types.POST_SHOPPINGLIST_SUCCESS:
                 return undefined;
             default:
                 return state;
@@ -13,7 +12,7 @@ export default formReducer.plugin({
     },
     AddItemForm:(state, action) => {
         switch(action.type){
-            case POST_SHOPPINGITEM_SUCCESS:
+            case types.POST_SHOPPINGITEM_SUCCESS:
                 return undefined;
             default:
                 return state;

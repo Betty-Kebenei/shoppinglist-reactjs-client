@@ -1,21 +1,11 @@
 import _ from 'lodash';
-import { 
-    GET_ALLSHOPPINGITEMS_SUCCESS,
-    GET_ONESHOPPINGITEM_SUCCESS,
-    POST_SHOPPINGITEM_SUCCESS,
-    UPDATE_SHOPPINGITEM_SUCCESS,
-    DELETE_SHOPPINGITEM_SUCCESS,
-    DELETE_ALLSHOPPINGITEMS_SUCCESS,
-    PAGINATE_SHOPPINGITEM,
-    SEARCH_SHOPPINGITEM,
-    SEARCH_SHOPPINGITEM_ERROR
-} from '../actions/ShoppingItems';
+import * as types from '../actions/ActionTypes';
 
 export default (state = {
     shoppingitems : {},
 }, action) => {
     switch(action.type) {
-        case GET_ALLSHOPPINGITEMS_SUCCESS:
+        case types.GET_ALLSHOPPINGITEMS_SUCCESS:
         if(action.payload.data){
             return {
                 ...state,
@@ -30,39 +20,39 @@ export default (state = {
          } 
         }
             
-        case GET_ONESHOPPINGITEM_SUCCESS:
+        case types.GET_ONESHOPPINGITEM_SUCCESS:
             return {
                 ...state,
                 shoppingitem: action.payload.data
             }
-        case POST_SHOPPINGITEM_SUCCESS:
+        case types.POST_SHOPPINGITEM_SUCCESS:
             return action.payload
-        case UPDATE_SHOPPINGITEM_SUCCESS:
+        case types.UPDATE_SHOPPINGITEM_SUCCESS:
             return {
                 ...state,
                 shoppingitem: action.payload.data
             }
-        case PAGINATE_SHOPPINGITEM:
+        case types.PAGINATE_SHOPPINGITEM:
             return  {
                 ...state,
                 count: action.payload.data.count,
                 shoppingitems: _.mapKeys(action.payload.data.shoppingitems, 'item_id')
             }
-        case SEARCH_SHOPPINGITEM:
+        case types.SEARCH_SHOPPINGITEM:
             return  {
                 ...state,
                 count: action.payload.data.count,
                 shoppingitems: _.mapKeys(action.payload.data.shoppingitems, 'item_id'),
                 errorMessage: ''
             }
-        case SEARCH_SHOPPINGITEM_ERROR:
+        case types.SEARCH_SHOPPINGITEM_ERROR:
             return {
                 state: {},
                 errorMessage: action.payload.response.data.message
             }
-        case DELETE_SHOPPINGITEM_SUCCESS:
+        case types.DELETE_SHOPPINGITEM_SUCCESS:
             return action.payload
-        case DELETE_ALLSHOPPINGITEMS_SUCCESS:
+        case types.DELETE_ALLSHOPPINGITEMS_SUCCESS:
             return action.payload
 
         default:

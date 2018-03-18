@@ -1,14 +1,14 @@
 import expect from 'expect';
 import loginReducer from '../../reducers/reducer_login';
 
-import { LOGIN_SUCCESS, NOT_LOGGEDIN } from '../../actions/Login';
+import * as types from "../../actions/ActionTypes";
 
 describe('Login reducer', () => {
     it('should authenticate a user when passed LOGIN_SUCCESS', () => {
         const initialState = [{}];
 
         const action = {
-            type: LOGIN_SUCCESS,
+            type: types.LOGIN_SUCCESS,
         }
         const expected = {
             "0": {},
@@ -24,7 +24,7 @@ describe('Login reducer', () => {
         const initialState = [{}];
 
         const action = {
-            type: NOT_LOGGEDIN,
+            type: types.NOT_LOGGEDIN,
         }
         const expected = {
             state: undefined,
