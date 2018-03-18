@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import toastr from 'toastr';
 
-export const REGISTER_USER = 'register_user';
+import * as types from './ActionTypes';
 
 const ROOT_URL = 'https://flaskapiv1.herokuapp.com';
 
@@ -12,7 +12,7 @@ export const createUser = (values, callback) => {
             const request = await axios.post(`${ROOT_URL}/auth/register`, values)
 
             dispatch({
-                type: REGISTER_USER,
+                type: types.REGISTER_USER,
                 payload: request
             });
             callback()

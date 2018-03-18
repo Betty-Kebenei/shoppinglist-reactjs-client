@@ -4,7 +4,7 @@ import expect from 'expect';
 
 import AddListForm from '../../components/shoppinglist/AddListForm';
 
-describe('AddListForm', () => {
+describe('Interface', () => {
     it('should render a form with a className: AddListForm', () => {
         expect(shallow(<AddListForm />).exists(<form className='AddListForm'></form>)).toBe(true)
     });
