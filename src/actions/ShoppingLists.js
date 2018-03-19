@@ -5,54 +5,54 @@ import toastr from 'toastr';
 
 const ROOT_URL = 'https://flaskapiv1.herokuapp.com';
 
-export const postShoppinglist = (values, callback) => {
-  return async (dispatch) => {
-    try {
-      const request = await instance.post(`${ROOT_URL}/shoppinglists`, values);
-
+export const postShoppinglist = (values) => {
+  return dispatch => {
+    return instance.post(`${ROOT_URL}/shoppinglists`, values).then( (response) => {
+      console.log(response)
       dispatch({
-        type: types.POST_SHOPPINGLIST_SUCCESS,
-        payload: request
+        type: types.POST_SHOPPINGLIST_SUCCESS
       })
-
       dispatch(getAllShoppinglists())
-
-    }catch(error){
+    }).catch(error => {
       toastr.error(error.response.data.message); 
-    }
-  }; 
+    });
+  }
 }
 
-export const updateShoppinglist = (list_id, values, callback) =>{
-  return async (dispatch) => {
-    try {
-      const request = await instance.put(`${ROOT_URL}/shoppinglists/${list_id}`, values);
-
-      dispatch({
-        type: types.UPDATE_SHOPPINGLIST_SUCCESS,
-        payload: request
-      })
-      callback()
-    }catch(error){
+export const updateShoppinglist = (list_id, values, callback) => {
+  return dispatch => {
+    return instance.put(`${ROOT_URL}/shoppinglists/${list_id}`, values).then ( 
+      (response) => {
+        dispatch({
+          type: types.UPDATE_SHOPPINGLIST_SUCCESS,
+          payload: response
+        })
+        callback()
+    }).catch(error => {
       toastr.error(error.response.data.message);
-    }
-  }; 
+    })
+  }
+}
+
+export const getAllShoppinglistsSuccess = (shoppingLists) => {
+  return({
+    type: types.GET_ALLSHOPPINGLISTS_SUCCESS,
+    shoppingLists
+  });
 }
 
 export const getAllShoppinglists = () => {
-  return async (dispatch) => {
-    try{
-      const request = await instance.get(`${ROOT_URL}/shoppinglists`);
-
+  return (dispatch) => {
+    return instance.get(`${ROOT_URL}/shoppinglists`).then(response => {
       dispatch({
         type: types.GET_ALLSHOPPINGLISTS_SUCCESS,
-        payload: request
+        payload: response
       })
-    }catch(error) {
-      if(error.response.data.message === 'Sorry your token expired, please log in again!'){
-        dispatch({type: types.NOT_LOGGEDIN})
-      }
-    }
+    }).catch(error => {
+      // if(error.response.data.message === 'Sorry your token expired, please log in again!'){
+      //   dispatch({type: types.NOT_LOGGEDIN})
+      // }
+    });
   }
 }
 
@@ -71,20 +71,19 @@ export const deleteShoppinglists = () => {
   });
 }
 
-export const deleteShoppinglist = (list_id) => {
-  return async (dispatch) => {
-    try {
-      const request = await instance.delete(`${ROOT_URL}/shoppinglists/${list_id}`)
 
-      dispatch({
-        type: types.DELETE_ONESHOPPINGLIST_SUCCESS,
-        payload: request
-      })
-      window.location.reload();
-    }catch(error){
-      toastr.error(error.response.data.message);
-    }};
- }
+export const deleteShoppinglist = (list_id) => {
+  return dispatch => {
+    return instance.delete(`${ROOT_URL}/shoppinglists/${list_id}`).then( 
+      (response) => {
+        dispatch({
+          type: types.DELETE_ONESHOPPINGLIST_SUCCESS,
+          payload: response
+        })
+        dispatch(getAllShoppinglists())
+    }).catch(error => {});
+  }
+}
 
 export const paginateLists = (limit, page) => {
   return({
@@ -93,20 +92,20 @@ export const paginateLists = (limit, page) => {
   });
 }
 
-export const searchShoppinglist = (term) =>{
-  return async (dispatch) => {
-    try{
-      const request = await instance.get(`${ROOT_URL}/shoppinglists?q=${term}`)
-
-      dispatch({
-        type: types.SEARCH_SHOPPINGLIST,
-        payload: request
+export const searchShoppinglist = (term) => {
+  return dispatch => {
+    return instance.get(`${ROOT_URL}/shoppinglists?q=${term}`).then( 
+      response => {
+        dispatch({
+          type: types.SEARCH_SHOPPINGLIST,
+          payload: response
+        })
+      }).catch(error => {
+        dispatch({
+          type: types.SEARCH_SHOPPINGLIST_ERROR,
+          payload: error
+        })
       })
-    }catch(error) {
-      dispatch({
-        type: types.SEARCH_SHOPPINGLIST_ERROR,
-        payload: error
-      })
-    }
   }
 }
+
